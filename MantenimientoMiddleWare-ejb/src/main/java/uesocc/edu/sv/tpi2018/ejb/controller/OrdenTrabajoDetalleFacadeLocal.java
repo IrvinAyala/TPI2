@@ -14,20 +14,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajoDetalle;
  * @author irvin
  */
 @Local
-public interface OrdenTrabajoDetalleFacadeLocal {
+public interface OrdenTrabajoDetalleFacadeLocal extends AbstractInterface<OrdenTrabajoDetalle>{
 
-    void create(OrdenTrabajoDetalle ordenTrabajoDetalle);
-
-    void edit(OrdenTrabajoDetalle ordenTrabajoDetalle);
-
-    void remove(OrdenTrabajoDetalle ordenTrabajoDetalle);
-
-    OrdenTrabajoDetalle find(Object id);
-
-    List<OrdenTrabajoDetalle> findAll();
-
-    List<OrdenTrabajoDetalle> findRange(int[] range);
-
-    int count();
-    
 }
