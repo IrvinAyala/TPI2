@@ -37,14 +37,17 @@ public abstract class AbstractResource<T> implements Serializable {
             @QueryParam("pagesize") @DefaultValue("0") int pagesize) throws Exception {
         List<T> salida = null;
         if (getFacade() != null) {
-            salida = getFacade().findAll();
-        } else {
-            throw new Exception("Error, facade null");
-        }
-        if (salida == null) {
+            if (pagesize == 0) {
+                salida = getFacade().findAll();
+            } else if (pagesize > 0 && first > 0) {
+                salida = getFacade().findRange();
+            }
+            if (salida != null) {
+                return salida;
+            }
             throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
         }
-        return salida;
+        throw new Exception("Error, facade null");
     }
 
     protected abstract T crearNuevo();
@@ -52,11 +55,16 @@ public abstract class AbstractResource<T> implements Serializable {
     @GET
     @Path("{idfind}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public T findById(@PathParam("idfind") long id) {
+    public T findById(@PathParam("idfind") long id) throws Exception {
         if (getFacade() != null) {
-            return getFacade().find(id);
+            T salida;
+            salida = getFacade().find(id);
+            if (salida != null) {
+                return salida;
+            }
+            throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
         }
-        throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
+        throw new Exception("Error, facade null");
     }
 
     @PUT
@@ -65,35 +73,29 @@ public abstract class AbstractResource<T> implements Serializable {
         T salida;
         if (getFacade() != null) {
             salida = getFacade().edit(registro);
-        } else {
-            throw new Exception("Error, facade null");
-        }
-        if (salida = null) {
+            if (salida != null) {
+                return salida;
+            }
             throw new ControllerException(ControllerException.Message.REGISTRO_NO_EDITADO);
-
         }
-        return salida;
+        throw new Exception("Error, facade null");
     }
 
     @DELETE
     @Path("{iddelete}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public String deleteElement(@PathParam("iddelete") Integer id) {
-        T salida;
-
+    public boolean deleteElement(@PathParam("iddelete") Integer id) throws Exception {
         if (id > 0) {
-
             if (getFacade() != null) {
-                salida = getFacade().find(id);
-                if (salida != null) {
-                    if (getFacade().remove(salida)) {
-                        return "Se elimino";
-                    }
+                T encontrado = getFacade().find(id);
+                if (encontrado != null) {
+                    return getFacade().remove(encontrado);
                 }
+                throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
             }
+            throw new Exception("Error, facade null");
         }
-
-        return "Error al elminar";
+        throw new ControllerException(ControllerException.Message.REGISTRO_NO_ELIMINADO);
     }
 
     @POST
