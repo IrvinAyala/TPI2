@@ -8,7 +8,7 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Marca;
 import uesocc.edu.sv.tpi2018.ejb.entities.ModeloDetalle;
 import uesocc.edu.sv.tpi2018.ejb.entities.Parte;
 
-@Generated(value="EclipseLink-2.6.1.v20150605-rNA", date="2018-03-27T12:38:12")
+@Generated(value="EclipseLink-2.6.1.v20150605-rNA", date="2018-03-27T14:34:26")
 @StaticMetamodel(Articulo.class)
 public class Articulo_ { 
 

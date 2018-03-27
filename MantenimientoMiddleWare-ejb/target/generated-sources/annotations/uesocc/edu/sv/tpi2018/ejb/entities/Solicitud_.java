@@ -8,7 +8,7 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Calendario;
 import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
 import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
 
-@Generated(value="EclipseLink-2.6.1.v20150605-rNA", date="2018-03-27T12:38:12")
+@Generated(value="EclipseLink-2.6.1.v20150605-rNA", date="2018-03-27T14:34:26")
 @StaticMetamodel(Solicitud.class)
 public class Solicitud_ { 
 
