@@ -14,20 +14,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Solicitud;
  * @author irvin
  */
 @Local
-public interface SolicitudFacadeLocal {
+public interface SolicitudFacadeLocal extends AbstractInterface<Solicitud>{
 
-    void create(Solicitud solicitud);
-
-    void edit(Solicitud solicitud);
-
-    void remove(Solicitud solicitud);
-
-    Solicitud find(Object id);
-
-    List<Solicitud> findAll();
-
-    List<Solicitud> findRange(int[] range);
-
-    int count();
-    
 }

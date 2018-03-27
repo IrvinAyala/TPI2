@@ -14,20 +14,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.CalendarioEquipo;
  * @author irvin
  */
 @Local
-public interface CalendarioEquipoFacadeLocal {
+public interface CalendarioEquipoFacadeLocal extends AbstractInterface<CalendarioEquipo>{
 
-    void create(CalendarioEquipo calendarioEquipo);
-
-    void edit(CalendarioEquipo calendarioEquipo);
-
-    void remove(CalendarioEquipo calendarioEquipo);
-
-    CalendarioEquipo find(Object id);
-
-    List<CalendarioEquipo> findAll();
-
-    List<CalendarioEquipo> findRange(int[] range);
-
-    int count();
-    
 }

@@ -14,20 +14,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Pasos;
  * @author irvin
  */
 @Local
-public interface PasosFacadeLocal {
+public interface PasosFacadeLocal extends AbstractInterface<Pasos>{
 
-    void create(Pasos pasos);
-
-    void edit(Pasos pasos);
-
-    void remove(Pasos pasos);
-
-    Pasos find(Object id);
-
-    List<Pasos> findAll();
-
-    List<Pasos> findRange(int[] range);
-
-    int count();
-    
 }

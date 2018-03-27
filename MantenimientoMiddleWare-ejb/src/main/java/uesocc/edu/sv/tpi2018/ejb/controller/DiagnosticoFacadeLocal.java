@@ -14,20 +14,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Diagnostico;
  * @author irvin
  */
 @Local
-public interface DiagnosticoFacadeLocal {
+public interface DiagnosticoFacadeLocal extends AbstractInterface<Diagnostico>{
 
-    void create(Diagnostico diagnostico);
-
-    void edit(Diagnostico diagnostico);
-
-    void remove(Diagnostico diagnostico);
-
-    Diagnostico find(Object id);
-
-    List<Diagnostico> findAll();
-
-    List<Diagnostico> findRange(int[] range);
-
-    int count();
-    
 }

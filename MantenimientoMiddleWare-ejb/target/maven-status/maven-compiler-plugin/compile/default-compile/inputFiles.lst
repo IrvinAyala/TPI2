@@ -10,6 +10,7 @@
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/controller/DiagnosticoFacade.java
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/controller/TipoResponsableFacade.java
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/entities/Responsable.java
+/home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/controller/AbstractInterfaceName.java
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/entities/OrdenTrabajoDetalle.java
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/controller/DiagnosticoFacadeLocal.java
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/controller/OrdenTrabajoFacade.java

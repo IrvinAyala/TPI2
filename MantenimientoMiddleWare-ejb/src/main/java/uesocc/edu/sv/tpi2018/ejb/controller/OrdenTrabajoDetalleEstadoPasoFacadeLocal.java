@@ -14,20 +14,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajoDetalleEstadoPaso;
  * @author irvin
  */
 @Local
-public interface OrdenTrabajoDetalleEstadoPasoFacadeLocal {
+public interface OrdenTrabajoDetalleEstadoPasoFacadeLocal extends AbstractInterface<OrdenTrabajoDetalleEstadoPaso>{
 
-    void create(OrdenTrabajoDetalleEstadoPaso ordenTrabajoDetalleEstadoPaso);
-
-    void edit(OrdenTrabajoDetalleEstadoPaso ordenTrabajoDetalleEstadoPaso);
-
-    void remove(OrdenTrabajoDetalleEstadoPaso ordenTrabajoDetalleEstadoPaso);
-
-    OrdenTrabajoDetalleEstadoPaso find(Object id);
-
-    List<OrdenTrabajoDetalleEstadoPaso> findAll();
-
-    List<OrdenTrabajoDetalleEstadoPaso> findRange(int[] range);
-
-    int count();
-    
 }

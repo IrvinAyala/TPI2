@@ -14,20 +14,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Parte;
  * @author irvin
  */
 @Local
-public interface ParteFacadeLocal {
+public interface ParteFacadeLocal extends AbstractInterface<Parte>{
 
-    void create(Parte parte);
-
-    void edit(Parte parte);
-
-    void remove(Parte parte);
-
-    Parte find(Object id);
-
-    List<Parte> findAll();
-
-    List<Parte> findRange(int[] range);
-
-    int count();
-    
 }

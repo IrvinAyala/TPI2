@@ -14,20 +14,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.EquipoDetalle;
  * @author irvin
  */
 @Local
-public interface EquipoDetalleFacadeLocal {
+public interface EquipoDetalleFacadeLocal extends AbstractInterface<EquipoDetalle>{
 
-    void create(EquipoDetalle equipoDetalle);
-
-    void edit(EquipoDetalle equipoDetalle);
-
-    void remove(EquipoDetalle equipoDetalle);
-
-    EquipoDetalle find(Object id);
-
-    List<EquipoDetalle> findAll();
-
-    List<EquipoDetalle> findRange(int[] range);
-
-    int count();
-    
 }

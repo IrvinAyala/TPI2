@@ -14,20 +14,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.ProcedimientoPaso;
  * @author irvin
  */
 @Local
-public interface ProcedimientoPasoFacadeLocal {
+public interface ProcedimientoPasoFacadeLocal extends AbstractInterface<ProcedimientoPaso>{
 
-    void create(ProcedimientoPaso procedimientoPaso);
-
-    void edit(ProcedimientoPaso procedimientoPaso);
-
-    void remove(ProcedimientoPaso procedimientoPaso);
-
-    ProcedimientoPaso find(Object id);
-
-    List<ProcedimientoPaso> findAll();
-
-    List<ProcedimientoPaso> findRange(int[] range);
-
-    int count();
-    
 }
