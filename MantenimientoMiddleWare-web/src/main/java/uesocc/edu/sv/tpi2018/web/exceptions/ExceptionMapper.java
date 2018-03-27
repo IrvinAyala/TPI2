@@ -13,6 +13,8 @@ import javax.ws.rs.core.Response;
  */
 public class ExceptionMapper implements javax.ws.rs.ext.ExceptionMapper<Throwable> {
 
+    public EnumControllerException messages;
+    
     @Override
     public Response toResponse(Throwable exception) {
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("ServerException", exception.getMessage()).build();

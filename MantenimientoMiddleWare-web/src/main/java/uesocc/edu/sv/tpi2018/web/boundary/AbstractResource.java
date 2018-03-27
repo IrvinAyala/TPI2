@@ -1,3 +1,5 @@
+package uesocc.edu.sv.tpi2018.web.boundary;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import javax.ws.rs.core.MediaType;
  * @author andrea
  */
 public abstract class AbstractResource<T> implements Serializable {
+    
 
     protected abstract AbstractInterface<T> getFacade();
     protected T entity;
