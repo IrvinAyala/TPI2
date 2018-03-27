@@ -1,19 +1,21 @@
 package uesocc.edu.sv.tpi2018.web.boundary;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,24 +27,23 @@ import javax.ws.rs.core.MediaType;
  * @author andrea
  */
 public abstract class AbstractResource<T> implements Serializable {
-    
 
     protected abstract AbstractInterface<T> getFacade();
     protected T entity;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
-    public List<T> findAll() {
+    public List<T> findAll(@QueryParam("first") @DefaultValue("1") int first,
+            @QueryParam("pagesize") @DefaultValue("0") int pagesize) throws Exception {
         List<T> salida = null;
-
         if (getFacade() != null) {
             salida = getFacade().findAll();
+        } else {
+            throw new Exception("Error, facade null");
         }
-
         if (salida == null) {
-            salida = new ArrayList<>();
+            throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
         }
-
         return salida;
     }
 
@@ -52,31 +53,26 @@ public abstract class AbstractResource<T> implements Serializable {
     @Path("{idfind}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
     public T findById(@PathParam("idfind") long id) {
-
-        T salida = null;
-
         if (getFacade() != null) {
-            salida = getFacade().find(id);
+            return getFacade().find(id);
         }
-        if (salida == null) {
-            salida = crearNuevo();  //Aquí va la excepcion
-        }
-        return salida;
+        throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
     }
 
     @PUT
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public boolean editElement(T registro) {
-
-        try {
-
-            return getFacade().edit(registro);
-
-        } catch (Exception ex) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+    public T editElement(T registro) throws Exception {
+        T salida;
+        if (getFacade() != null) {
+            salida = getFacade().edit(registro);
+        } else {
+            throw new Exception("Error, facade null");
         }
+        if (salida = null) {
+            throw new ControllerException(ControllerException.Message.REGISTRO_NO_EDITADO);
 
-        return false;
+        }
+        return salida;
     }
 
     @DELETE
@@ -102,16 +98,17 @@ public abstract class AbstractResource<T> implements Serializable {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public T create(T registro) {
+    public T create(T registro) throws Exception {
         if (registro != null) {//igual cero 0 y areglar registro != null && registro.getidtipoDoc == null
             if (getFacade() != null) {
                 T r = getFacade().crear(registro);
                 if (r != null) {
                     return r;
                 }
+                throw new ControllerException(ControllerException.Message.REGISTRO_NO_CREADO);
             }
+            throw new Exception("Error, facade null");
         }
-        return crearNuevo(); //Aquí va la excepcion
+        throw new ControllerException(ControllerException.Message.FALTA_CAMPO_REQUERIDO);
     }
-
 }

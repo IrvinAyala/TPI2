@@ -15,9 +15,14 @@ public class ControllerException extends RuntimeException {
         super(message);
     }
 
+    public ControllerException(Message message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public enum Message {
 
         FALTA_CAMPO_REQUERIDO("Falta un campo obligatorio"),
+        REGISTRO_NO_CREADO("Registro no creado"),
         REGISTRO_REPETIDO("El registro no se pudo crear porque ya existe"),
         REGISTRO_NO_ELIMINADO("No se pudo eliminar el registro"),
         REGISTRO_NO_EDITADO("No se pudo editar el registro"),
