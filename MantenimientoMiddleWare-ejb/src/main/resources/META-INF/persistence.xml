@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="uesocc.edu.sv.ingnieria.TPI_MantenimientoMiddleWare-ejb_ejb_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.ModeloDetalle</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Articulo</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Parte</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.OrdenTrabajo</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Prioridad</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.OrdenTrabajoDetalleEstadoPaso</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.ProcedimientoPaso</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.CalendarioEquipo</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Responsable</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.TipoResponsable</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Marca</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.TipoMantenimiento</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Diagnostico</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Pasos</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Calendario</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.EquipoDetalle</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.DiagnosticoParte</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Equipo</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.OrdenTrabajoDetalle</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Unidad</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Procedimiento</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Solicitud</class>
+    <class>uesocc.edu.sv.ingnieria.TPI.definiciones.Modelo</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.1.18:5432/tpitest"/>
+      <property name="javax.persistence.jdbc.user" value="tpi"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="tpiPassword"/>
+    </properties>
+  </persistence-unit>
+</persistence>
