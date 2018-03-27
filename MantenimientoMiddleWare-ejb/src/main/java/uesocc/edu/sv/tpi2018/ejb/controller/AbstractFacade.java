@@ -22,19 +22,34 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-    public void create(T entity) {
-        getEntityManager().persist(entity);
+    public T create(T entity) {
+        try {
+            getEntityManager().persist(entity);
+            return entity;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public void edit(T entity) {
-        getEntityManager().merge(entity);
+    public T edit(T entity) {
+        try {
+            getEntityManager().merge(entity);
+            return entity;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public boolean remove(T entity) {
+        try {
+            getEntityManager().remove(getEntityManager().merge(entity));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    public void remove(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
-    }
-
-    public T find(Object id) {
+    public T findById(Object id) {
         return getEntityManager().find(entityClass, id);
     }
 
@@ -44,12 +59,12 @@ public abstract class AbstractFacade<T> {
         return getEntityManager().createQuery(cq).getResultList();
     }
 
-    public List<T> findRange(int[] range) {
+    public List<T> findRange(int desde, int pageSize) {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
-        q.setMaxResults(range[1] - range[0] + 1);
-        q.setFirstResult(range[0]);
+        q.setMaxResults(pageSize);
+        q.setFirstResult(desde);
         return q.getResultList();
     }
 

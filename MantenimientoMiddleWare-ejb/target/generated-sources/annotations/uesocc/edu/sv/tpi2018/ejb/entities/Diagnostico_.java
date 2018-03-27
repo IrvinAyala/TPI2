@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import uesocc.edu.sv.tpi2018.ejb.entities.DiagnosticoParte;
 
-@Generated(value="EclipseLink-2.6.1.v20150605-rNA", date="2018-03-27T14:34:26")
+@Generated(value="EclipseLink-2.6.1.v20150605-rNA", date="2018-03-27T14:50:25")
 @StaticMetamodel(Diagnostico.class)
 public class Diagnostico_ { 
 

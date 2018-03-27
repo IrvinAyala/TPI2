@@ -58,6 +58,7 @@ uesocc/edu/sv/tpi2018/ejb/controller/DiagnosticoFacade.class
 uesocc/edu/sv/tpi2018/ejb/controller/ProcedimientoPasoFacadeLocal.class
 uesocc/edu/sv/tpi2018/ejb/controller/TipoMantenimientoFacade.class
 uesocc/edu/sv/tpi2018/ejb/controller/ModeloDetalleFacade.class
+uesocc/edu/sv/tpi2018/ejb/controller/AbstractInterface.class
 uesocc/edu/sv/tpi2018/ejb/entities/Marca.class
 uesocc/edu/sv/tpi2018/ejb/entities/CalendarioEquipo.class
 uesocc/edu/sv/tpi2018/ejb/entities/TipoResponsable_.class

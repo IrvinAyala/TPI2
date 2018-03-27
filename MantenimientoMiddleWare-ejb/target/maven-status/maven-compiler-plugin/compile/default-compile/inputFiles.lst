@@ -57,6 +57,7 @@
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/controller/TipoMantenimientoFacade.java
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/controller/OrdenTrabajoDetalleFacadeLocal.java
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/controller/ModeloDetalleFacade.java
+/home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/controller/AbstractInterface.java
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/entities/ModeloDetallePK.java
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/controller/PrioridadFacade.java
 /home/irvin/ArchivosTPI/TPI2/MantenimientoMiddleWare-ejb/src/main/java/uesocc/edu/sv/tpi2018/ejb/controller/ProcedimientoPasoFacadeLocal.java

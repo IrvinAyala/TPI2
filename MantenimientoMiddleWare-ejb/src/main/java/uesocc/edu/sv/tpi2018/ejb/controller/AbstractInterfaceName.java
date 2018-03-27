@@ -6,14 +6,19 @@
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
 import java.util.List;
-import javax.ejb.Local;
-import uesocc.edu.sv.tpi2018.ejb.entities.Articulo;
 
 /**
  *
- * @author irvin
+ * @author danielm
  */
-@Local
-public interface ArticuloFacadeLocal extends AbstractInterface<Articulo>{
+public interface AbstractInterfaceName<T> {
+    
+    default List<T> findByName(String name, int first, int pageSize){
+        
+        
+    return null;
+    }
+        
+    
     
 }
