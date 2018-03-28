@@ -5,9 +5,13 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import uesocc.edu.sv.tpi2018.ejb.entities.TipoMantenimiento;
 
 /**
@@ -17,6 +21,21 @@ import uesocc.edu.sv.tpi2018.ejb.entities.TipoMantenimiento;
 @Stateless
 public class TipoMantenimientoFacade extends AbstractFacade<TipoMantenimiento> implements TipoMantenimientoFacadeLocal {
 
+    public List<TipoMantenimiento>findByNameLike(String name,int first,int pageSize){
+        if(!name.equals("") && !name.isEmpty()){
+            try {
+            Query q = em.createNamedQuery("TipoMantenimiento.findByNombreLike");
+            q.setParameter("nombre",name);
+            q.setFirstResult(first);
+            q.setMaxResults(pageSize);
+            return q.getResultList();   
+            } catch (Exception e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE,e.getMessage(), e);
+            }
+        }
+        return null;
+    }
+   
     @PersistenceContext(unitName = "mantenimientoPU")
     private EntityManager em;
 

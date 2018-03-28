@@ -15,5 +15,5 @@ import uesocc.edu.sv.tpi2018.ejb.entities.TipoMantenimiento;
  */
 @Local
 public interface TipoMantenimientoFacadeLocal extends AbstractInterface<TipoMantenimiento>{
-
+    public List<TipoMantenimiento> findByNameLike (String name, int first,int pageSize);
 }
