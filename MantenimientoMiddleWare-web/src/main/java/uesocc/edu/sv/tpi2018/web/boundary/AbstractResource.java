@@ -96,7 +96,6 @@ public abstract class AbstractResource<T> implements Serializable {
                 }
             }
         }
-
         return "Error al elminar";
     }
 

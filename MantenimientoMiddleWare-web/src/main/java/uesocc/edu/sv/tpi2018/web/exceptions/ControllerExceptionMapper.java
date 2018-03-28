@@ -16,7 +16,7 @@ public class ControllerExceptionMapper implements ExceptionMapper<ControllerExce
 
     @Override
     public Response toResponse(ControllerException exception) {
-        return Response.status(Response.Status.BAD_REQUEST).header("controllerException", exception.getMessage()).build();
+        return Response.status(Response.Status.OK).entity(new Object()).header("controllerException", exception.getMessage()).build();
     }
     
 }
