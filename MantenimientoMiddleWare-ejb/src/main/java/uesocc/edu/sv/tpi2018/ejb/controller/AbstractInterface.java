@@ -15,7 +15,11 @@ public interface AbstractInterface<T> {
     
     public T create(T entity);
     
+    public boolean crear (T entity);
+    
     public T edit(T entity);
+    
+    public boolean editar (T entity);
     
     public boolean remove(T entity);
 
@@ -23,7 +27,7 @@ public interface AbstractInterface<T> {
 
     public List<T> findAll();
     
-    public List<T> findRange(int desde, int pageSize);
+    public List<T> findRange(int first, int pageSize);
 
     public int count();
     
