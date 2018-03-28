@@ -20,17 +20,26 @@ import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
  *
  * @author andrea
  */
-public interface FIndByName<T> {
+public interface FindByName<T> {
 
-    abstract AbstractInterface<T> getFacade();
+    abstract AbstractFacade<T> getFacadeName();
 
     @GET
     @Path("findbyname/{nombre}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
     default List<T> findByName(@PathParam("nombre") String nombre,
             @QueryParam("first") @DefaultValue("1") int first,
-            @QueryParam("pagesize") @DefaultValue("50") int pagesize) {
-        return getFacade().findByName(nombre, first, pagesize);
+            @QueryParam("pagesize") @DefaultValue("50") int pagesize) throws Exception {
+        
+        if(getFacadeName() != null){
+            List <T> salida = getFacadeName().findByNameLike(nombre, first, pagesize);
+            if(salida !=null){
+                return salida;
+            }
+             throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
+        }
+        throw new Exception("Error, facade null");
+        
     }
 
 }

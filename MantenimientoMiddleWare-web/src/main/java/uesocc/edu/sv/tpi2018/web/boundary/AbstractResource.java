@@ -1,10 +1,7 @@
 package uesocc.edu.sv.tpi2018.web.boundary;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -40,7 +37,7 @@ public abstract class AbstractResource<T> implements Serializable {
             if (pagesize == 0) {
                 salida = getFacade().findAll();
             } else if (pagesize > 0 && first > 0) {
-                salida = getFacade().findRange();
+                salida = getFacade().findRange(first,pagesize);
             }
             if (salida != null) {
                 return salida;
@@ -58,7 +55,7 @@ public abstract class AbstractResource<T> implements Serializable {
     public T findById(@PathParam("idfind") long id) throws Exception {
         if (getFacade() != null) {
             T salida;
-            salida = getFacade().find(id);
+            salida = getFacade().findById(id);
             if (salida != null) {
                 return salida;
             }
@@ -87,7 +84,7 @@ public abstract class AbstractResource<T> implements Serializable {
     public boolean deleteElement(@PathParam("iddelete") Integer id) throws Exception {
         if (id > 0) {
             if (getFacade() != null) {
-                T encontrado = getFacade().find(id);
+                T encontrado = getFacade().findById(id);
                 if (encontrado != null) {
                     return getFacade().remove(encontrado);
                 }
@@ -103,7 +100,7 @@ public abstract class AbstractResource<T> implements Serializable {
     public T create(T registro) throws Exception {
         if (registro != null) {//igual cero 0 y areglar registro != null && registro.getidtipoDoc == null
             if (getFacade() != null) {
-                T r = getFacade().crear(registro);
+                T r = getFacade().create(registro);
                 if (r != null) {
                     return r;
                 }
