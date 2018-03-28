@@ -13,6 +13,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Articulo;
  * @author irvin
  */
 @Local
-public interface ArticuloFacadeLocal extends AbstractInterface<Articulo>, AbstractInterfaceName<Articulo>{
+public interface ArticuloFacadeLocal extends AbstractInterface<Articulo>{
     
 }

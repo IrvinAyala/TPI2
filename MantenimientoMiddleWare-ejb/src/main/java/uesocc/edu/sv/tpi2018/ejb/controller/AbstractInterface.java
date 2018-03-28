@@ -27,7 +27,7 @@ public interface AbstractInterface<T> {
 
     public List<T> findAll();
     
-    public List<T> findRange(int desde, int pageSize);
+    public List<T> findRange(int first, int pageSize);
 
     public int count();
     
