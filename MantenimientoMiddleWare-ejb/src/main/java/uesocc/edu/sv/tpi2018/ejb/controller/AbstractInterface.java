@@ -15,7 +15,11 @@ public interface AbstractInterface<T> {
     
     public T create(T entity);
     
+    public boolean crear (T entity);
+    
     public T edit(T entity);
+    
+    public boolean editar (T entity);
     
     public boolean remove(T entity);
 

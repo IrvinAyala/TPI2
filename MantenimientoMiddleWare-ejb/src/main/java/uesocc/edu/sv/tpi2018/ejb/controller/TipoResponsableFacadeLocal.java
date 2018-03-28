@@ -5,7 +5,6 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
-import java.util.List;
 import javax.ejb.Local;
 import uesocc.edu.sv.tpi2018.ejb.entities.TipoResponsable;
 

@@ -6,6 +6,8 @@
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 
 /**
@@ -23,23 +25,51 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public T create(T entity) {
+        T salida = null;
         try {
-            getEntityManager().persist(entity);
-            return entity;
+            EntityManager em = getEntityManager();
+            if (em != null && entity != null) {
+                em.persist(entity);
+                salida = entity;
+            }
         } catch (Exception e) {
-            return null;
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
+        return null;
+    }
+
+    public boolean crear(T entity) {
+        boolean salida = false;
+        T e = this.create(entity);
+        if (e != null) {
+            salida = true;
+        }
+        return salida;
     }
 
     public T edit(T entity) {
+        T salida = null;
         try {
-            getEntityManager().merge(entity);
-            return entity;
+            EntityManager em = getEntityManager();
+            if (em != null && entity != null) {
+                em.merge(entity);
+                salida = entity;
+            }
         } catch (Exception e) {
-            return null;
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
+        return salida;
     }
-    
+
+    public boolean editar(T entity) {
+        boolean salida = false;
+        T e = this.edit(entity);
+        if (e != null) {
+            salida = true;
+        }
+        return salida;
+    }
+
     public boolean remove(T entity) {
         try {
             getEntityManager().remove(getEntityManager().merge(entity));
@@ -75,5 +105,4 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
 }
