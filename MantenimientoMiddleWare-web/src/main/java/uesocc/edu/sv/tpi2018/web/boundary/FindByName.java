@@ -19,6 +19,7 @@ import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
 /**
  *
  * @author andrea
+ * @param <T>
  */
 public interface FindByName<T> {
 
