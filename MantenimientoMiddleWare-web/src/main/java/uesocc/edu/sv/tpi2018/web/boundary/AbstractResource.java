@@ -31,7 +31,7 @@ public abstract class AbstractResource<T> implements Serializable {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
-    public List<T> findAll(@QueryParam("first") @DefaultValue("1") int first,
+    public List<T> findAll(@QueryParam("first") @DefaultValue("0") int first,
             @QueryParam("pagesize") @DefaultValue("0") int pagesize) throws Exception {
         List<T> salida = null;
         if (getFacade() != null) {
