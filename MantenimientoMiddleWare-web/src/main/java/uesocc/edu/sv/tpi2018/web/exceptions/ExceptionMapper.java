@@ -6,11 +6,13 @@
 package uesocc.edu.sv.tpi2018.web.exceptions;
 
 import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.Provider;
 
 /**
  *
  * @author danm
  */
+@Provider
 public class ExceptionMapper implements javax.ws.rs.ext.ExceptionMapper<Throwable> {
 
     public EnumControllerException messages;

@@ -16,7 +16,7 @@ public class ControllerException extends RuntimeException {
     }
 
     public ControllerException(Message message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        super(message.getErrorMessage());
     }
 
     public enum Message {
@@ -26,7 +26,8 @@ public class ControllerException extends RuntimeException {
         REGISTRO_REPETIDO("El registro no se pudo crear porque ya existe"),
         REGISTRO_NO_ELIMINADO("No se pudo eliminar el registro"),
         REGISTRO_NO_EDITADO("No se pudo editar el registro"),
-        REGISTRO_NO_ENCONTRADO("No se encontró registros para el id provisto");
+        REGISTRO_NO_ENCONTRADO("No se encontraron registros para los datos provistos"),
+        ID_NO_ENCONTRADO("No se encontro el id especificado");
 
         private String errorMessage;
 

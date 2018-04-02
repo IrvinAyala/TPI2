@@ -23,6 +23,7 @@ import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
 /**
  *
  * @author andrea
+ * @param <T>
  */
 public abstract class AbstractResource<T> implements Serializable {
 
@@ -37,7 +38,7 @@ public abstract class AbstractResource<T> implements Serializable {
         if (getFacade() != null) {
             if (pagesize == 0) {
                 salida = getFacade().findAll();
-            } else if (pagesize > 0 && first > 0) {
+            } else if (pagesize > 0 && first >= 0) {
                 salida = getFacade().findRange(first,pagesize);
             }
             if (salida != null) {
@@ -60,7 +61,7 @@ public abstract class AbstractResource<T> implements Serializable {
             if (salida != null) {
                 return salida;
             }
-            throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
+            throw new ControllerException(ControllerException.Message.ID_NO_ENCONTRADO);
         }
         throw new Exception("Error, facade null");
     }

@@ -7,16 +7,18 @@ package uesocc.edu.sv.tpi2018.web.exceptions;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
 /**
  *
  * @author danm
  */
+@Provider
 public class ControllerExceptionMapper implements ExceptionMapper<ControllerException>{
 
     @Override
     public Response toResponse(ControllerException exception) {
-        return Response.status(Response.Status.OK).entity(new Object()).header("controllerException", exception.getMessage()).build();
+        return Response.status(Response.Status.OK).header("controllerException", exception.getMessage()).build();
     }
     
 }
