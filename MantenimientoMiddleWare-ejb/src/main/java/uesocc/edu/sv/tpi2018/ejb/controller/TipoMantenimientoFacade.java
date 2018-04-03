@@ -42,9 +42,7 @@ public class TipoMantenimientoFacade extends AbstractFacade<TipoMantenimiento> i
                 q.setParameter("name", name);
                 q.setMaxResults(pageSize);
                 q.setFirstResult(first);
-                List<TipoMantenimiento> l = q.getResultList();
-                System.out.println("LISTA FINDBYNAMELIKE"+l);
-                return l;
+                return q.getResultList();
             } catch (Exception e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             }
