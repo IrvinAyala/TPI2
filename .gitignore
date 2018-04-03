@@ -3,3 +3,6 @@
 /MantenimientoMiddleWare-ear/target/
 /MantenimientoMiddleWare-web/nbproject/
 */target/*
+*.class
+*.war
+*.jar

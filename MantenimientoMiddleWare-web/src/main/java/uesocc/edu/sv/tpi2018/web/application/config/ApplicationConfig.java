@@ -30,8 +30,10 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(uesocc.edu.sv.tpi2018.web.boundary.MarcaResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.TipoMantenimientoResource.class);
         resources.add(uesocc.edu.sv.tpi2018.web.exceptions.ControllerExceptionMapper.class);
         resources.add(uesocc.edu.sv.tpi2018.web.exceptions.ExceptionMapper.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.exceptions.NotFoundMapper.class);
     }
     
 }

@@ -16,7 +16,7 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Marca;
  * @author danm
  */
 @Path("marca")
-public class MarcaResource extends AbstractResource<Marca> {
+public class MarcaResource extends AbstractResource<Marca> implements FindByName<Marca> {
 
     @EJB
     protected MarcaFacadeLocal mfl;
@@ -29,6 +29,11 @@ public class MarcaResource extends AbstractResource<Marca> {
     @Override
     protected Marca crearNuevo() {
         return new Marca();
+    }
+
+    @Override
+    public AbstractInterface<Marca> getFacadeName() {
+        return mfl;
     }
     
 }

@@ -46,7 +46,7 @@ public abstract class AbstractResource<T> implements Serializable {
             }
             throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
         }
-        throw new Exception("Error, facade null");
+        throw new NullPointerException("Facade null");
     }
 
     protected abstract T crearNuevo();
@@ -54,7 +54,7 @@ public abstract class AbstractResource<T> implements Serializable {
     @GET
     @Path("{idfind}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public T findById(@PathParam("idfind") long id) throws Exception {
+    public T findById(@PathParam("idfind") int id) throws Exception {
         if (getFacade() != null) {
             T salida;
             salida = getFacade().findById(id);
@@ -63,7 +63,7 @@ public abstract class AbstractResource<T> implements Serializable {
             }
             throw new ControllerException(ControllerException.Message.ID_NO_ENCONTRADO);
         }
-        throw new Exception("Error, facade null");
+        throw new NullPointerException("Facade null");
     }
 
     @PUT
@@ -77,7 +77,7 @@ public abstract class AbstractResource<T> implements Serializable {
             }
             throw new ControllerException(ControllerException.Message.REGISTRO_NO_EDITADO);
         }
-        throw new Exception("Error, facade null");
+        throw new NullPointerException("Facade null");
     }
 
     @DELETE
@@ -92,7 +92,7 @@ public abstract class AbstractResource<T> implements Serializable {
                 }
                 throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
             }
-            throw new Exception("Error, facade null");
+            throw new NullPointerException("Facade null");
         }
         throw new ControllerException(ControllerException.Message.REGISTRO_NO_ELIMINADO);
     }
@@ -108,7 +108,7 @@ public abstract class AbstractResource<T> implements Serializable {
                 }
                 throw new ControllerException(ControllerException.Message.REGISTRO_NO_CREADO);
             }
-            throw new Exception("Error, facade null");
+            throw new NullPointerException("Facade null");
         }
         throw new ControllerException(ControllerException.Message.FALTA_CAMPO_REQUERIDO);
     }

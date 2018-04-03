@@ -5,6 +5,7 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,10 @@ import javax.persistence.EntityManager;
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;
+    
+    public List<T> findByNameLike(String name, int first, int pagesize){
+        return Collections.emptyList();
+    }
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;

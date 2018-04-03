@@ -5,7 +5,6 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
-import java.util.List;
 import javax.ejb.Local;
 import uesocc.edu.sv.tpi2018.ejb.entities.TipoMantenimiento;
 
@@ -16,6 +15,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.TipoMantenimiento;
 @Local
 public interface TipoMantenimientoFacadeLocal extends AbstractInterface<TipoMantenimiento>{
 
-    public List<TipoMantenimiento> findByNameLike(String name, int first,int pageSize);
+    
     
 }

@@ -24,6 +24,8 @@ public interface AbstractInterface<T> {
     public boolean remove(T entity);
 
     public T findById(Object id);
+    
+    public List<T> findByNameLike(String name, int first, int pagesize);
 
     public List<T> findAll();
     

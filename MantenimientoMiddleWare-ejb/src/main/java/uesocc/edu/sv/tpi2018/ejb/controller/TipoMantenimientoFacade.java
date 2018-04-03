@@ -35,16 +35,16 @@ public class TipoMantenimientoFacade extends AbstractFacade<TipoMantenimiento> i
     
     @Override
     public List<TipoMantenimiento> findByNameLike(String name, int first, int pageSize) {
-//        System.out.println("entreeeeee");
-//        System.out.println(name);
+
         if (!(name.isEmpty())) {
             try {
-//                System.out.println("entre");
-                Query q = em.createNamedQuery("TipoMantenimiento.findByNameLike");
+                Query q = em.createNamedQuery("TipoMantenimiento.findByNombreLike");
                 q.setParameter("name", name);
                 q.setMaxResults(pageSize);
                 q.setFirstResult(first);
-                return q.getResultList();
+                List<TipoMantenimiento> l = q.getResultList();
+                System.out.println("LISTA FINDBYNAMELIKE"+l);
+                return l;
             } catch (Exception e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             }

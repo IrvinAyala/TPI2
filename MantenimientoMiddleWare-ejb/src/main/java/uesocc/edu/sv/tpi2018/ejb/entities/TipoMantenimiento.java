@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TipoMantenimiento.findAll", query = "SELECT t FROM TipoMantenimiento t")
     , @NamedQuery(name = "TipoMantenimiento.findByIdTipoMantenimiento", query = "SELECT t FROM TipoMantenimiento t WHERE t.idTipoMantenimiento = :idTipoMantenimiento")
     , @NamedQuery(name = "TipoMantenimiento.findByNombre", query = "SELECT t FROM TipoMantenimiento t WHERE t.nombre = :nombre")
+    , @NamedQuery(name = "TipoMantenimiento.findByNombreLike", query = "SELECT t FROM TipoMantenimiento t WHERE LOWER(t.nombre) LIKE CONCAT('%',LOWER(:name),'%')")
     , @NamedQuery(name = "TipoMantenimiento.findByDescripcion", query = "SELECT t FROM TipoMantenimiento t WHERE t.descripcion = :descripcion")})
 public class TipoMantenimiento implements Serializable {
 

@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import uesocc.edu.sv.tpi2018.ejb.controller.AbstractInterface;
 import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
 
 /**
@@ -23,13 +24,13 @@ import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
  */
 public interface FindByName<T> {
 
-    abstract AbstractFacade<T> getFacadeName();
+    abstract AbstractInterface<T> getFacadeName();
 
     @GET
     @Path("findbyname/{nombre}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
     default List<T> findByName(@PathParam("nombre") String nombre,
-            @QueryParam("first") @DefaultValue("1") int first,
+            @QueryParam("first") @DefaultValue("0") int first,
             @QueryParam("pagesize") @DefaultValue("50") int pagesize) throws Exception {
         
         if(getFacadeName() != null){
@@ -39,7 +40,7 @@ public interface FindByName<T> {
             }
              throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
         }
-        throw new Exception("Error, facade null");
+        throw new NullPointerException("Facade null");
         
     }
 
