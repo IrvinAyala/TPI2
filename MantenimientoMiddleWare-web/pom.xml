@@ -126,6 +126,21 @@
                 <version>1.6.0</version>
                 <executions>
                     <execution>
+                        <id>Bajar docker</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>docker-compose</executable>
+                            <arguments>
+                                <argument>-f</argument>
+                                <argument>${dockerPath}/docker-compose.yml</argument>
+                                <argument>down</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>Test plugin----------------</id>
                         <phase>install</phase>
                         <goals>
