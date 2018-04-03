@@ -26,7 +26,7 @@ public class UnidadFacade extends AbstractFacade<Unidad> implements UnidadFacade
     }
 
     public UnidadFacade() {
-        super(Unidad.class);
+        super(Unidad.class,"Unidad.findByNombreLike");
     }
     
 }

@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pasos.findAll", query = "SELECT p FROM Pasos p")
+    , @NamedQuery(name = "Pasos.findByNombreLike", query = "SELECT p FROM Pasos p WHERE LOWER(p.nombre) LIKE CONCAT('%',LOWER(:name),'%')")    
     , @NamedQuery(name = "Pasos.findByIdPaso", query = "SELECT p FROM Pasos p WHERE p.idPaso = :idPaso")
     , @NamedQuery(name = "Pasos.findByNombre", query = "SELECT p FROM Pasos p WHERE p.nombre = :nombre")})
 public class Pasos implements Serializable {

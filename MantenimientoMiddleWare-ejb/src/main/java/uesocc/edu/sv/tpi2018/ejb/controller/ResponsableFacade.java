@@ -26,7 +26,7 @@ public class ResponsableFacade extends AbstractFacade<Responsable> implements Re
     }
 
     public ResponsableFacade() {
-        super(Responsable.class);
+        super(Responsable.class,"Responsable.findByNombreLike");
     }
     
 }

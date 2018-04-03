@@ -26,7 +26,7 @@ public class MarcaFacade extends AbstractFacade<Marca> implements MarcaFacadeLoc
     }
 
     public MarcaFacade() {
-        super(Marca.class);
+        super(Marca.class,"Marca.findByNombreLike");
     }
     
 }

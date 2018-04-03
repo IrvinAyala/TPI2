@@ -26,7 +26,7 @@ public class ArticuloFacade extends AbstractFacade<Articulo> implements Articulo
     }
 
     public ArticuloFacade() {
-        super(Articulo.class);
+        super(Articulo.class,"Articulo.findByNombreLike");
     }
     
 }

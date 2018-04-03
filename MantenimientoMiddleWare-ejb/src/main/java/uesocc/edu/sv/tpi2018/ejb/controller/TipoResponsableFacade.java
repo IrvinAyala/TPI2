@@ -26,7 +26,7 @@ public class TipoResponsableFacade extends AbstractFacade<TipoResponsable> imple
     }
 
     public TipoResponsableFacade() {
-        super(TipoResponsable.class);
+        super(TipoResponsable.class,"TipoResponsable.findByNombreLike");
     }
     
 }

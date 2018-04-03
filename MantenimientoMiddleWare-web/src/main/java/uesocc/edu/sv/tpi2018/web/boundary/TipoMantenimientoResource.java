@@ -5,6 +5,7 @@
  */
 package uesocc.edu.sv.tpi2018.web.boundary;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.ws.rs.Path;
 import uesocc.edu.sv.tpi2018.ejb.controller.AbstractInterface;
@@ -16,7 +17,7 @@ import uesocc.edu.sv.tpi2018.ejb.entities.TipoMantenimiento;
  * @author danm
  */
 @Path("tipomantenimiento")
-public class TipoMantenimientoResource extends AbstractResource<TipoMantenimiento> implements FindByName<TipoMantenimiento> {
+public class TipoMantenimientoResource extends AbstractResource<TipoMantenimiento> implements FindByName<TipoMantenimiento>{
 
     @EJB
     TipoMantenimientoFacadeLocal tmfl;

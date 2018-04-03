@@ -24,7 +24,7 @@ import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
  */
 public interface FindByName<T> {
 
-    abstract AbstractInterface<T> getFacadeName();
+    AbstractInterface<T> getFacadeName();
 
     @GET
     @Path("findbyname/{nombre}")

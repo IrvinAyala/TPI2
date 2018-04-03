@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Diagnostico.findAll", query = "SELECT d FROM Diagnostico d")
+    , @NamedQuery(name = "Diagnostico.findByNombreLike", query = "SELECT d FROM Diagnostico d WHERE LOWER(d.nombre) LIKE CONCAT('%',LOWER(:name),'%')")
     , @NamedQuery(name = "Diagnostico.findByIdDiagnostico", query = "SELECT d FROM Diagnostico d WHERE d.idDiagnostico = :idDiagnostico")
     , @NamedQuery(name = "Diagnostico.findByNombre", query = "SELECT d FROM Diagnostico d WHERE d.nombre = :nombre")
     , @NamedQuery(name = "Diagnostico.findByDescripcion", query = "SELECT d FROM Diagnostico d WHERE d.descripcion = :descripcion")})
