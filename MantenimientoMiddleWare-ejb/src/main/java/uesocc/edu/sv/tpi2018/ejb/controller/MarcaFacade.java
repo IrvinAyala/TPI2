@@ -25,6 +25,11 @@ public class MarcaFacade extends AbstractFacade<Marca> implements MarcaFacadeLoc
         return em;
     }
 
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
+
     public MarcaFacade() {
         super(Marca.class,"Marca.findByNombreLike");
     }
