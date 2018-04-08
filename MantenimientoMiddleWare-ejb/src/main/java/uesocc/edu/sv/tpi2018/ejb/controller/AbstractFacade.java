@@ -33,7 +33,7 @@ public abstract class AbstractFacade<T> {
     
     public List<T> findByNameLike(String name, int first, int pagesize) {
          if (!(name.isEmpty())) {
-              if(query!=null){
+              if(query!=null||!query.isEmpty()){
             try {
                
                 Query q = getEntityManager().createNamedQuery(query);

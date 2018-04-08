@@ -5,202 +5,162 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
-import javax.ejb.EJB;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.util.List;
+import javax.persistence.EntityTransaction;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
-import org.mockito.Matchers;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.junit.ClassRule;
+import org.powermock.reflect.Whitebox;
 import uesocc.edu.sv.tpi2018.ejb.entities.Marca;
 
 /**
  *
  * @author doratt
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(value = {Persistence.class, EntityManagerFactory.class})
-
 public class MarcaFacadeTest {
 
-    
-    MarcaFacade mf = new MarcaFacade();
-    
-    EntityManagerFactory mockedEMF = Mockito.mock(EntityManagerFactory.class);
-    EntityManager ema = Mockito.mock(EntityManager.class);
-    public MarcaFacadeTest() {
-    }
+    @ClassRule//Le puse esto por que con @Rule est objeto no puede ser statico
+    public static EntityManagerProvider emp;
+
+    static MarcaFacade mf = new MarcaFacade();
 
     @BeforeClass
-    public static void setUpClass() {
+    public static void init() {
+        emp = EntityManagerProvider.getInstance("mantenimientoTestPU");
+        Whitebox.setInternalState(mf, "em", emp.getEm());
+        Whitebox.setInternalState(mf, "query", "Marca.findByNombreLike");
+
     }
 
-    @AfterClass
-    public static void tearDownClass() {
+    @Test
+    public void when_creating_null_marca_expect_false() {
+        startTransaction();
+        boolean result = mf.crear(null);
+
+        assertEquals(0, mf.findAll().size());
+        assertFalse(result);
     }
 
-    @Before
-    public void inicializar() {
-        PowerMockito.mockStatic(Persistence.class);
-        PowerMockito.mockStatic(EntityManagerFactory.class);
-        PowerMockito.when(Persistence.createEntityManagerFactory(Matchers.anyString())).thenReturn(mockedEMF);
-        PowerMockito.when(mockedEMF.createEntityManager()).thenReturn(ema);
-        PowerMockito.doNothing().when(ema).persist(Marca.class);
+    @Test
+    public void when_creating_new_marca_expect_true() {
+        Marca nuevaMarca = new Marca();
+        nuevaMarca.setNombre("Test Marca");
+        nuevaMarca.setActivo(true);
+
+        startTransaction();
+        boolean result = mf.crear(nuevaMarca);
+
+        assertTrue(result);
+        assertEquals(1, mf.findAll().size());
+    }
+
+    @Test
+    public void when_modify_valid_marca_expect_true() {
+        startTransaction();
+        mf.getEntityManager().persist(new Marca(null, "test marca", true));
+
+        Marca expected = new Marca(1, "changed marca", false);
+
+        Marca result = mf.edit(expected);
+
+        assertNotNull(result.getIdMarca());
+        assertEquals(result.getNombre(), expected.getNombre());
+    }
+
+    @Test
+    public void when_delete_null_marca_expect_false() {
+        startTransaction();
+        boolean result = mf.remove(null);
+        assertEquals(0, mf.findAll().size());
+        assertFalse(result);
+    }
+
+    @Test
+    public void when_delete_valid_marca_expect_true() {
+        startTransaction();
+        mf.getEntityManager().persist(new Marca(null, "test marca", true));
+        Marca entity = new Marca(1);
+        boolean result = mf.remove(entity);
+        assertTrue(result);
+    }
+
+    @Test
+    public void findAll() {
+        startTransaction();
+        mf.getEntityManager().persist(new Marca(null, "test marca", true));
+        mf.getEntityManager().persist(new Marca(null, "test marca", true));
+        List<Marca> list = mf.findAll();
+        assertEquals(2, list.size());
+    }
+
+    @Test
+    public void when_find_valid_return_entity() {
+        startTransaction();
+        mf.getEntityManager().persist(new Marca(1, "test find", true));
+        Marca result = mf.findById(1);
+        assertEquals("test find", result.getNombre());
+    }
+
+    @Test
+    public void when_find_invalid_return_entity() {
+        startTransaction();
+        Marca result = mf.findById(1);
+        assertNull(result);
+    }
+
+    @Test
+    public void findbynameLike() {
+        startTransaction();
+        mf.getEntityManager().persist(new Marca(null, "findName1", true));
+        mf.getEntityManager().persist(new Marca(null, "findName2", true));
+        mf.getEntityManager().persist(new Marca(null, "findName3", true));
+        mf.getEntityManager().persist(new Marca(null, "findName4", true));
+        List<Marca> result = mf.findByNameLike("findName", 0, 4);
+
+        assertNotNull(result);
+        assertEquals(4, result.size());
+
+//        assertEquals(true, result.get(0).getNombre().contains("find4"));
+    }
+    
+    @Test
+    public void count(){
+        startTransaction();
+        mf.getEntityManager().persist(new Marca(null, "findRange1", true));
+        mf.getEntityManager().persist(new Marca(null, "findRange2", true));
         
-       
+        assertEquals(2, mf.count());
+    }
+
+    @Test
+    public void findRange() {
+        startTransaction();
+        mf.getEntityManager().persist(new Marca(null, "findRange1", true));
+        mf.getEntityManager().persist(new Marca(null, "findRange2", true));
+        mf.getEntityManager().persist(new Marca(null, "findRange3", true));
+        mf.getEntityManager().persist(new Marca(null, "findRange4", true));
+        List<Marca> result = mf.findRange(0, 4);
+        
+        assertNotNull(result);
+        assertEquals(4, result.size());
+    }
+
+    public void startTransaction() {
+        mf.getEntityManager().getTransaction().begin();
     }
 
     @After
-    public void tearDown() {
+    public void cleanup() {
+        EntityTransaction tx = mf.getEntityManager().getTransaction();
+        emp.rollbackResource(tx);
     }
 
-    /**
-     * Test of create method, of class MarcaFacade.
-     */
-    @Test
-    public void testCreate() throws Exception {
-        mf.setEm(ema);
-        System.out.println("create");
-        Marca result = mf.create(new Marca());
-        Marca expResult = new Marca();
-
-        assertEquals(expResult.getClass(), result.getClass());
-
-//        
-//        Marca entity = null;
-//        MarcaFacade instance = new MarcaFacade();
-//        Marca expResult = null;
-//        Marca result = instance.create(entity);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+    @AfterClass
+    public static void tearDown() {
+        emp.killInstance();
     }
 
-    /**
-     * Test of crear method, of class MarcaFacade.
-     */
-//    @Test
-//    public void testCrear() throws Exception {
-//        System.out.println("crear");
-//        Marca entity = null;
-//        MarcaFacade instance = new MarcaFacade();
-//        boolean expResult = false;
-//        boolean result = instance.crear(entity);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of edit method, of class MarcaFacade.
-//     */
-//    @Test
-//    public void testEdit() throws Exception {
-//        System.out.println("edit");
-//        Marca entity = null;
-//        MarcaFacade instance = new MarcaFacade();
-//        Marca expResult = null;
-//        Marca result = instance.edit(entity);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of editar method, of class MarcaFacade.
-//     */
-//    @Test
-//    public void testEditar() throws Exception {
-//        System.out.println("editar");
-//        Marca entity = null;
-//        MarcaFacade instance = new MarcaFacade();
-//        boolean expResult = false;
-//        boolean result = instance.editar(entity);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of remove method, of class MarcaFacade.
-//     */
-//    @Test
-//    public void testRemove() throws Exception {
-//        System.out.println("remove");
-//        Marca entity = null;
-//        MarcaFacade instance = new MarcaFacade();
-//        boolean expResult = false;
-//        boolean result = instance.remove(entity);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of findById method, of class MarcaFacade.
-//     */
-//    @Test
-//    public void testFindById() throws Exception {
-//        System.out.println("findById");
-//        Object id = null;
-//        MarcaFacade instance = new MarcaFacade();
-//        Marca expResult = null;
-//        Marca result = instance.findById(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of findAll method, of class MarcaFacade.
-//     */
-//    @Test
-//    public void testFindAll() throws Exception {
-//        System.out.println("findAll");
-//        MarcaFacade instance = new MarcaFacade();
-//        List<Marca> expResult = null;
-//        List<Marca> result = instance.findAll();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of findRange method, of class MarcaFacade.
-//     */
-//    @Test
-//    public void testFindRange() throws Exception {
-//        System.out.println("findRange");
-//        int first = 0;
-//        int pageSize = 0;
-//        MarcaFacade instance = new MarcaFacade();
-//        List<Marca> expResult = null;
-//        List<Marca> result = instance.findRange(first, pageSize);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of count method, of class MarcaFacade.
-//     */
-//    @Test
-//    public void testCount() throws Exception {
-//        System.out.println("count");
-//        MarcaFacade instance = new MarcaFacade();
-//        int expResult = 0;
-//        int result = instance.count();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
 }

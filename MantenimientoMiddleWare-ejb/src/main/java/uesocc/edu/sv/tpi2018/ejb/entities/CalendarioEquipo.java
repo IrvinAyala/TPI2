@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author irvin
  */
 @Entity
-@Table(name = "calendario_equipo", catalog = "tpitest", schema = "public")
+@Table(name = "calendario_equipo", schema = "public")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CalendarioEquipo.findAll", query = "SELECT c FROM CalendarioEquipo c")
