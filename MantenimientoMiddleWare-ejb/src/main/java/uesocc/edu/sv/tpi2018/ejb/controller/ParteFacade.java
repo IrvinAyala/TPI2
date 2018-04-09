@@ -26,7 +26,7 @@ public class ParteFacade extends AbstractFacade<Parte> implements ParteFacadeLoc
     }
 
     public ParteFacade() {
-        super(Parte.class);
+        super(Parte.class,"Parte.findByNombreLike");
     }
     
 }

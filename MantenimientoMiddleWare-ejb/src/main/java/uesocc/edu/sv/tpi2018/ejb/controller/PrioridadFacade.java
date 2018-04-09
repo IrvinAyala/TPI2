@@ -26,7 +26,7 @@ public class PrioridadFacade extends AbstractFacade<Prioridad> implements Priori
     }
 
     public PrioridadFacade() {
-        super(Prioridad.class);
+        super(Prioridad.class,"Prioridad.findByNombreLike");
     }
     
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -18,14 +19,36 @@ import javax.persistence.EntityManager;
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;
-    
-    public List<T> findByNameLike(String name, int first, int pagesize){
-        return Collections.emptyList();
-    }
+    private String query;
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
+
+    public AbstractFacade(Class<T> entityClass, String query) {
+        this.entityClass = entityClass;
+        this.query=query;
+    }
+    
+    
+    public List<T> findByNameLike(String name, int first, int pagesize) {
+         if (!(name.isEmpty())) {
+              if(query!=null){
+            try {
+               
+                Query q = getEntityManager().createNamedQuery(query);
+                q.setParameter("name", name);
+                q.setMaxResults(pagesize);
+                q.setFirstResult(first);
+                return q.getResultList();
+            } catch (Exception e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            }
+        }
+         }
+        return Collections.emptyList();
+    }
+
 
     protected abstract EntityManager getEntityManager();
 

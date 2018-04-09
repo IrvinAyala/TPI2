@@ -29,8 +29,27 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.ArticuloResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.DiagnosticoParteResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.DiagnosticoResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.EquipoDetalleResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.EquipoResource.class);
         resources.add(uesocc.edu.sv.tpi2018.web.boundary.MarcaResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.ModeloDetalleResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.ModeloResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.OrdenTrabajoDetalleEstadoPasoResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.OrdenTrabajoDetalleResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.OrdenTrabajoResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.ParteResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.PasosResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.PrioridadResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.ProcedimientoPasoResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.ProcedimientoResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.ResponsableResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.SolicitudResource.class);
         resources.add(uesocc.edu.sv.tpi2018.web.boundary.TipoMantenimientoResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.TipoResponsableResource.class);
+        resources.add(uesocc.edu.sv.tpi2018.web.boundary.UnidadResource.class);
         resources.add(uesocc.edu.sv.tpi2018.web.exceptions.ControllerExceptionMapper.class);
         resources.add(uesocc.edu.sv.tpi2018.web.exceptions.ExceptionMapper.class);
         resources.add(uesocc.edu.sv.tpi2018.web.exceptions.NotFoundMapper.class);

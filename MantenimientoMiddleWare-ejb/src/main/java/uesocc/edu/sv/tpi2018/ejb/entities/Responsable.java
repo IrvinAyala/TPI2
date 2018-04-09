@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Responsable.findAll", query = "SELECT r FROM Responsable r")
+    , @NamedQuery(name = "Responsable.findByNombreLike", query = "SELECT r FROM Responsable r WHERE LOWER(r.nombre) LIKE CONCAT('%',LOWER(:name),'%')")
     , @NamedQuery(name = "Responsable.findByIdResponsable", query = "SELECT r FROM Responsable r WHERE r.idResponsable = :idResponsable")
     , @NamedQuery(name = "Responsable.findByNombre", query = "SELECT r FROM Responsable r WHERE r.nombre = :nombre")})
 public class Responsable implements Serializable {

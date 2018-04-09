@@ -30,24 +30,8 @@ public class TipoMantenimientoFacade extends AbstractFacade<TipoMantenimiento> i
     }
 
     public TipoMantenimientoFacade() {
-        super(TipoMantenimiento.class);
+        super(TipoMantenimiento.class,"TipoMantenimiento.findByNombreLike");
     }
-    
-    @Override
-    public List<TipoMantenimiento> findByNameLike(String name, int first, int pageSize) {
-
-        if (!(name.isEmpty())) {
-            try {
-                Query q = em.createNamedQuery("TipoMantenimiento.findByNombreLike");
-                q.setParameter("name", name);
-                q.setMaxResults(pageSize);
-                q.setFirstResult(first);
-                return q.getResultList();
-            } catch (Exception e) {
-                Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-            }
-        }
-        return null;
-    }
+ 
     
 }
