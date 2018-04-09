@@ -1,9 +1,14 @@
 package uesocc.edu.sv.tpi2018.web.boundary;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.json.Json;
+import javax.json.JsonBuilderFactory;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.persistence.Entity;
 import javax.persistence.EntityExistsException;
 import javax.ws.rs.DELETE;
@@ -90,12 +95,12 @@ public abstract class AbstractResource<T> implements Serializable {
     @DELETE
     @Path("{iddelete}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public boolean deleteElement(@PathParam("iddelete") Integer id) throws Exception {
+    public String deleteElement(@PathParam("iddelete") Integer id) throws Exception {
         if (id > 0) {
             if (getFacade() != null) {
                 T encontrado = getFacade().findById(id);
                 if (encontrado != null) {
-                    return getFacade().remove(encontrado);
+                    return String.valueOf(getFacade().remove(encontrado));
                 }
                 throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
             }
