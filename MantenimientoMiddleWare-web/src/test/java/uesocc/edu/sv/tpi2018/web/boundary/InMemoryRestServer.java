@@ -21,32 +21,15 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jboss.resteasy.plugins.server.embedded.SecurityDomain;
 import org.jboss.resteasy.plugins.server.tjws.TJWSEmbeddedJaxrsServer;
 
-/**
- * Embedded InMemory REST server for RESTEasy. Usage:
- * <ul>
- * <li>InMemoryRestServer srv = InMemoryRestServer.create(...) passing your resources and provider classes</li>
- * <li>srv.baseUri() for BaseUrl</li>
- * <li>srv.newRequest("/relative/resource/path") to issue requests</li>
- * <li>srv.close() to stop</li>
- * </ul>
- *
- * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
- * @since 03.02.15 08:42
- */
 public class InMemoryRestServer implements AutoCloseable {
-
     private int port;
-
     private Set<Object> objects = new HashSet<Object>();
     private Set<Class> classes = new HashSet<Class>();
-
     private TJWSEmbeddedJaxrsServer server;
     private SecurityDomain securityDomain;
     private ResteasyClient resteasyClient;
     private String bindAddress = "localhost";
-
     private InMemoryRestServer(Object... objects) {
-
         append(objects);
     }
 
@@ -58,7 +41,6 @@ public class InMemoryRestServer implements AutoCloseable {
      * @throws IOException
      */
     public static InMemoryRestServer create(Object... objects) throws IOException {
-
         return create(null, objects);
     }
 
@@ -70,10 +52,8 @@ public class InMemoryRestServer implements AutoCloseable {
      * @throws IOException
      */
     public static InMemoryRestServer create(SecurityDomain securityDomain, Object... objects) throws IOException {
-
         InMemoryRestServer inMemoryRestServer = new InMemoryRestServer(objects);
         inMemoryRestServer.withDefaults(securityDomain);
-
         inMemoryRestServer.start();
         return inMemoryRestServer;
     }
@@ -94,14 +74,11 @@ public class InMemoryRestServer implements AutoCloseable {
     }
 
     private void start() throws IOException {
-
         port = findFreePort();
-
         server = new TJWSEmbeddedJaxrsServer();
         server.setPort(port);
         server.setBindAddress(bindAddress);
         server.setSecurityDomain(securityDomain);
-
         for (Object object : objects) {
             if (object instanceof Application) {
                 server.getDeployment().setApplication((Application) object);
@@ -109,16 +86,13 @@ public class InMemoryRestServer implements AutoCloseable {
                 server.getDeployment().getResources().add(object);
             }
         }
-
         for (Class resourceOrProvider : classes) {
-
             if (Application.class.isAssignableFrom(resourceOrProvider)) {
                 server.getDeployment().setApplicationClass(resourceOrProvider.getName());
             } else {
                 server.getDeployment().getProviderClasses().add(resourceOrProvider.getName());
             }
         }
-
         server.start();
     }
 
