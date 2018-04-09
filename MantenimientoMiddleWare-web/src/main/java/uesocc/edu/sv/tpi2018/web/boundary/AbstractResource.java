@@ -2,6 +2,10 @@ package uesocc.edu.sv.tpi2018.web.boundary;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.Entity;
+import javax.persistence.EntityExistsException;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -39,12 +43,15 @@ public abstract class AbstractResource<T> implements Serializable {
             if (pagesize == 0) {
                 salida = getFacade().findAll();
             } else if (pagesize > 0 && first >= 0) {
-                salida = getFacade().findRange(first,pagesize);
+                salida = getFacade().findRange(first, pagesize);
             }
-            if (salida != null) {
+            if (salida == null) {
+                throw new ControllerException(ControllerException.Message.PARAMETRO_INVALIDO);
+            }
+            if (salida.size() > 0) {
                 return salida;
             }
-            throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
+            throw new ControllerException(ControllerException.Message.NO_HAY_REGISTROS);
         }
         throw new NullPointerException("Facade null");
     }
@@ -94,7 +101,7 @@ public abstract class AbstractResource<T> implements Serializable {
             }
             throw new NullPointerException("Facade null");
         }
-        throw new ControllerException(ControllerException.Message.REGISTRO_NO_ELIMINADO);
+        throw new ControllerException(ControllerException.Message.PARAMETRO_INVALIDO);
     }
 
     @POST
@@ -102,11 +109,17 @@ public abstract class AbstractResource<T> implements Serializable {
     public T create(T registro) throws Exception {
         if (registro != null) {//igual cero 0 y areglar registro != null && registro.getidtipoDoc == null
             if (getFacade() != null) {
-                T r = getFacade().create(registro);
-                if (r != null) {
-                    return r;
+                try {
+                    T r = getFacade().create(registro);
+                    if (r != null) {
+                        return r;
+                    }
+                    throw new ControllerException(ControllerException.Message.REGISTRO_NO_CREADO);
+                } catch (EntityExistsException e) {
+                    Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+                    throw new ControllerException(ControllerException.Message.REGISTRO_REPETIDO);
                 }
-                throw new ControllerException(ControllerException.Message.REGISTRO_NO_CREADO);
+
             }
             throw new NullPointerException("Facade null");
         }
