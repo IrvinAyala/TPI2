@@ -47,10 +47,7 @@ public abstract class AbstractResource<T> implements Serializable {
             if (salida == null) {
                 throw new ControllerException(ControllerException.Message.PARAMETRO_INVALIDO);
             }
-            if (salida.size() > 0) {
-                return salida;
-            }
-            throw new ControllerException(ControllerException.Message.NO_HAY_REGISTROS);
+            return salida;
         }
         throw new NullPointerException("Facade null");
     }
