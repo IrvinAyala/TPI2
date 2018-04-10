@@ -6,7 +6,10 @@
 package uesocc.edu.sv.tpi2018.web.boundary;
 
 import javax.ejb.EJB;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import uesocc.edu.sv.tpi2018.ejb.controller.AbstractInterface;
 import uesocc.edu.sv.tpi2018.ejb.controller.OrdenTrabajoFacadeLocal;
 import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
@@ -30,5 +33,6 @@ public class OrdenTrabajoResource extends AbstractResource<OrdenTrabajo>{
     protected OrdenTrabajo crearNuevo() {
         return new OrdenTrabajo();
     }
+    
     
 }

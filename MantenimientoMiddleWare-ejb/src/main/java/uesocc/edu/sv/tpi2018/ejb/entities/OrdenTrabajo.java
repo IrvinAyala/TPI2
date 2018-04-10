@@ -41,6 +41,17 @@ public class OrdenTrabajo implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_orden_trabajo")
     private Integer idOrdenTrabajo;
+    @Basic(optional = false)
+    @Column(name = "id_equipo")
+    private Integer idEquipo;
+
+    public Integer getIdEquipo() {
+        return idEquipo;
+    }
+
+    public void setIdEquipo(Integer idEquipo) {
+        this.idEquipo = idEquipo;
+    }
     @JoinColumn(name = "id_prioridad", referencedColumnName = "id_prioridad")
     @ManyToOne(optional = false)
     private Prioridad idPrioridad;

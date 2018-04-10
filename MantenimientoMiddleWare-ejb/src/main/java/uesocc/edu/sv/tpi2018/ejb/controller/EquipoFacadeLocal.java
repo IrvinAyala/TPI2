@@ -5,8 +5,10 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.util.List;
 import javax.ejb.Local;
 import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
+import uesocc.edu.sv.tpi2018.ejb.entities.EquipoDetalle;
 
 /**
  *
@@ -14,5 +16,5 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
  */
 @Local
 public interface EquipoFacadeLocal extends AbstractInterface<Equipo>{
-
+    public List<EquipoDetalle> getDetalle(int idEquipo);
 }
