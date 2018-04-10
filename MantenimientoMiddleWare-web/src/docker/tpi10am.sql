@@ -116,6 +116,7 @@ CREATE TABLE public.articulo(
 	id_parte int4 NOT NULL,
 	nombre varchar(255) NOT NULL,
 	descripcion text DEFAULT null,
+	activo boolean NOT NULL DEFAULT true,
 	CONSTRAINT id_articulo PRIMARY KEY (id_articulo)
 
 );
