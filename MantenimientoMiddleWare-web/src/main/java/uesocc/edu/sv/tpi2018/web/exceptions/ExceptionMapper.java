@@ -24,5 +24,4 @@ public class ExceptionMapper implements javax.ws.rs.ext.ExceptionMapper<Throwabl
         Logger.getLogger(getClass().getName()).log(Level.SEVERE, exception.getMessage(), exception);
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("server-exception", exception.getMessage()).build();
     }
-    
 }
