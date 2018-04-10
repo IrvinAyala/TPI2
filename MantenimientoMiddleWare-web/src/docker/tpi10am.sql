@@ -130,6 +130,7 @@ CREATE TABLE public.parte(
 	id_parte serial NOT NULL,
 	nombre varchar(100) NOT NULL,
 	descripcion text DEFAULT null,
+	activo boolean NOT NULL DEFAULT true,
 	CONSTRAINT id_parte PRIMARY KEY (id_parte)
 
 );

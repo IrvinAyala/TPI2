@@ -5,8 +5,10 @@
  */
 package uesocc.edu.sv.tpi2018.web.boundary;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import uesocc.edu.sv.tpi2018.ejb.controller.AbstractInterface;
 import uesocc.edu.sv.tpi2018.ejb.controller.ArticuloFacadeLocal;
 import uesocc.edu.sv.tpi2018.ejb.entities.Articulo;
@@ -35,5 +37,9 @@ public class ArticuloResource extends AbstractResource<Articulo> implements Find
     public AbstractInterface<Articulo> getFacadeName() {
         return afl;
     }
+     @Path("idEquipo/{idEquipo}")
+     public List<Articulo> findByIdEquipo(@PathParam("idEquipo") int idEquipo){
+         return afl.findByIdEquipo(idEquipo);
+     }
     
 }

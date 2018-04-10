@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Articulo.findByIdArticulo", query = "SELECT a FROM Articulo a WHERE a.idArticulo = :idArticulo")
     , @NamedQuery(name = "Articulo.findByNombre", query = "SELECT a FROM Articulo a WHERE a.nombre = :nombre")
     , @NamedQuery(name = "Articulo.findByDescripcion", query = "SELECT a FROM Articulo a WHERE a.descripcion = :descripcion")
-    , @NamedQuery(name = "Articulo.findByActivo", query = "SELECT a FROM Articulo a WHERE a.activo = :activo")})
+    , @NamedQuery(name = "Articulo.findByActivo", query = "SELECT a FROM Articulo a WHERE a.activo = :activo")
+    , @NamedQuery(name = "Articulo.findByIdEquipo", query = "SELECT a FROM Articulo a JOIN a.modeloDetalleList md JOIN md.modelo m JOIN m.equipoList e WHERE e.idEquipo = :idEquipo")})
 public class Articulo implements Serializable {
 
     private static final long serialVersionUID = 1L;

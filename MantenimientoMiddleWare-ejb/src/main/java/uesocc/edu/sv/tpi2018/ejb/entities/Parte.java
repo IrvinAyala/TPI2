@@ -52,6 +52,10 @@ public class Parte implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "descripcion")
     private String descripcion;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "activo")
+    private boolean activo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idParte")
     private List<DiagnosticoParte> diagnosticoParteList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idParte")
@@ -91,6 +95,14 @@ public class Parte implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+    
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @XmlTransient

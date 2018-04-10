@@ -7,7 +7,7 @@ services:
     ports:
       - "8070:8080"
   postgres:
-    build:
+    build: 
      context: .
      dockerfile: dockerfilePostgres
     restart: always
