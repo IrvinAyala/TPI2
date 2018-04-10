@@ -181,6 +181,7 @@ ALTER TABLE public.calendario_solicitud OWNER TO postgres;
 CREATE TABLE public.orden_trabajo(
 	id_orden_trabajo serial NOT NULL,
 	id_solicitud int4 NOT NULL,
+	id_equipo int4 NOT NULL,
 	id_prioridad int4 NOT NULL,
 	id_tipo_mantenimiento int4 NOT NULL,
 	CONSTRAINT id_orden_trabajo PRIMARY KEY (id_orden_trabajo)
