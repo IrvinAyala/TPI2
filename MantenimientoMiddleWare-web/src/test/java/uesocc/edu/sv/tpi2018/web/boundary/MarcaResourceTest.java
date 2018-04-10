@@ -7,7 +7,6 @@ package uesocc.edu.sv.tpi2018.web.boundary;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.json.JsonObject;
 import javax.persistence.EntityExistsException;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
@@ -19,14 +18,12 @@ import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.internal.util.reflection.Whitebox;
 import org.mockito.runners.MockitoJUnitRunner;
 import uesocc.edu.sv.tpi2018.ejb.controller.MarcaFacadeLocal;
 import uesocc.edu.sv.tpi2018.ejb.entities.Marca;
@@ -76,7 +73,7 @@ public class MarcaResourceTest {
      * Test of getAll method, of class MarcaResource.
      */
     @Test
-    public void findAllNotNullNotEmptyTest() throws Exception {
+    public void findAllNotNullNotEmptyTest(){
         List<Marca> lista = new ArrayList<>();
         lista.add(marca);
         lista.add(new Marca(2, "Marca2", true));
@@ -91,7 +88,7 @@ public class MarcaResourceTest {
     }
 
     @Test
-    public void findAllInvalidParamsTest() throws Exception {
+    public void findAllInvalidParamsTest(){
         Response response = server.newRequest("/marca?pagesize=-1").request().buildGet().invoke();
         Assert.assertNotNull(response);
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
@@ -106,7 +103,7 @@ public class MarcaResourceTest {
         lista.add(new Marca(3, "Marca3", false));
         lista.add(new Marca(4, "Marca4", false));
         Mockito.when(this.mfl.findRange(Matchers.anyInt(), Matchers.anyInt())).thenReturn(lista);
-        Response response = server.newRequest("/marca?pagesize=3&first=0").request().buildGet().invoke();
+        Response response = server.newRequest("/marca/?pagesize=3&first=0").request().buildGet().invoke();
         Assert.assertNotNull(response);
         assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
         List<Marca> lista2 = response.readEntity(new GenericType<List<Marca>>() {
@@ -114,6 +111,29 @@ public class MarcaResourceTest {
         assertEquals(4, lista2.size());
     }
 
+    @Test
+    public void findByNameLikeTest() {
+        List<Marca> lista = new ArrayList<>();
+        lista.add(marca);
+        lista.add(new Marca(2, "Marca2", true));
+        lista.add(new Marca(3, "Marca3", false));
+        lista.add(new Marca(4, "Marca4", false));
+        Mockito.when(this.mfl.findByNameLike(Matchers.anyString(), Matchers.anyInt(), Matchers.anyInt())).thenReturn(lista);
+        Response response = server.newRequest("/marca/nombre/Marca?pagesize=3&first=0").request().buildGet().invoke();
+        Assert.assertNotNull(response);
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        List<Marca> lista2 = response.readEntity(new GenericType<List<Marca>>() {
+        });
+        assertEquals(4, lista2.size());
+    }
+    
+     @Test
+    public void findByNameLikeInvalidParamsTest() {
+        Response response = server.newRequest("/marca/nombre/marca?pagesize=-1&first=-3").request().buildGet().invoke();
+        Assert.assertNotNull(response);
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        assertEquals(ControllerException.Message.PARAMETRO_INVALIDO.getErrorMessage(), response.getHeaderString("controller-exception"));
+    }
     /**
      * Test of create method, of class MarcaResource.
      */
@@ -153,9 +173,9 @@ public class MarcaResourceTest {
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
         assertEquals(ControllerException.Message.ID_NO_ENCONTRADO.getErrorMessage(), response.getHeaderString("controller-exception"));
     }
-    
+
     @Test
-    public void editSuccesfulTest(){
+    public void editSuccesfulTest() {
         Mockito.when(this.mfl.edit(Matchers.any(Marca.class))).thenReturn(marca);
         Response response = server.newRequest("/marca").request().buildPut(Entity.entity(marca, MediaType.APPLICATION_JSON)).invoke();
         Marca resultMarca = response.readEntity(Marca.class);
@@ -163,35 +183,35 @@ public class MarcaResourceTest {
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
         assertEquals(id, resultMarca.getIdMarca());
     }
-    
+
     @Test
-    public void editNonSuccesfulTest(){
+    public void editNonSuccesfulTest() {
         Mockito.when(this.mfl.edit(Matchers.any(Marca.class))).thenReturn(null);
         Response response = server.newRequest("/marca").request().buildPut(Entity.entity(marca, MediaType.APPLICATION_JSON)).invoke();
         Assert.assertNotNull(response);
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
         assertEquals(ControllerException.Message.REGISTRO_NO_EDITADO.getErrorMessage(), response.getHeaderString("controller-exception"));
     }
-    
+
     @Test
-    public void deleteBadIdTest(){
+    public void deleteBadIdTest() {
         Response response = server.newRequest("/marca/-1").request().buildDelete().invoke();
         Assert.assertNotNull(response);
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
         assertEquals(ControllerException.Message.PARAMETRO_INVALIDO.getErrorMessage(), response.getHeaderString("controller-exception"));
     }
-    
+
     @Test
-    public void deleteNonExistingRegistry(){
+    public void deleteNonExistingRegistry() {
         Mockito.when(this.mfl.findById(Matchers.anyInt())).thenReturn(null);
         Response response = server.newRequest("/marca/1").request().buildDelete().invoke();
         Assert.assertNotNull(response);
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
         assertEquals(ControllerException.Message.REGISTRO_NO_ENCONTRADO.getErrorMessage(), response.getHeaderString("controller-exception"));
     }
-    
+
     @Test
-    public void deleteExistingRegistry(){
+    public void deleteExistingRegistry() {
         Mockito.when(this.mfl.findById(Matchers.anyInt())).thenReturn(marca);
         Mockito.when(this.mfl.remove(Matchers.any(Marca.class))).thenReturn(true);
         Response response = server.newRequest("/marca/1").request(MediaType.APPLICATION_JSON).buildDelete().invoke();

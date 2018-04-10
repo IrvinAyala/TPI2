@@ -1,15 +1,9 @@
 package uesocc.edu.sv.tpi2018.web.boundary;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.json.Json;
-import javax.json.JsonBuilderFactory;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
-import javax.persistence.Entity;
 import javax.persistence.EntityExistsException;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
