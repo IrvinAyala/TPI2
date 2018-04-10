@@ -5,7 +5,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "8070:8080"
+      - "8080:8080"
   postgres:
     build: 
      context: .
