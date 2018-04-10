@@ -27,7 +27,9 @@ public class ControllerException extends RuntimeException {
         REGISTRO_NO_ELIMINADO("No se pudo eliminar el registro"),
         REGISTRO_NO_EDITADO("No se pudo editar el registro"),
         REGISTRO_NO_ENCONTRADO("No se encontraron registros para los datos provistos"),
-        ID_NO_ENCONTRADO("No se encontro el id especificado");
+        ID_NO_ENCONTRADO("No se encontro el id especificado"),
+        NO_HAY_REGISTROS("No se encontraron registros de la entidad"),
+        PARAMETRO_INVALIDO("Uno o mas parametros ingresados son invalidos");
 
         private String errorMessage;
 
