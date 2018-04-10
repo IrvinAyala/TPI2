@@ -6,7 +6,6 @@
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
 import java.util.List;
-import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.transaction.UserTransaction;
@@ -16,7 +15,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.weld.context.ejb.Ejb;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -77,19 +75,19 @@ public class TipoMantenimientoFacadeTest {
     /**
      * Test of findByNameLike method, of class TipoMantenimientoFacade.
      */
-    @Test
-    public void testFindByNameLike() throws Exception {
-        System.out.println("findByNameLike");
-        String name = "";
-        int first = 0;
-        int pagesize = 0;
-        TipoMantenimientoFacade instance = new TipoMantenimientoFacade();
-        List<TipoMantenimiento> expResult = null;
-        List<TipoMantenimiento> result = instance.findByNameLike(name, first, pagesize);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testFindByNameLike() throws Exception {
+//        System.out.println("findByNameLike");
+//        String name = "";
+//        int first = 0;
+//        int pagesize = 0;
+//        TipoMantenimientoFacade instance = new TipoMantenimientoFacade();
+//        List<TipoMantenimiento> expResult = null;
+//        List<TipoMantenimiento> result = instance.findByNameLike(name, first, pagesize);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of create method, of class TipoMantenimientoFacade.

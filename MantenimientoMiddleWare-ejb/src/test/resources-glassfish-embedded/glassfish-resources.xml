@@ -5,7 +5,7 @@
 <resources>
     <jdbc-resource pool-name="ArquillianEmbeddedH2Pool"
                    jndi-name="jdbc/arquillian"/>
-    <jdbc-connection-pool name="ArquillianEmbeddedH2DerbyPool"
+    <jdbc-connection-pool name="ArquillianEmbeddedH2Pool"
                           res-type="javax.sql.DataSource"
                           datasource-classname="org.h2.jdbcx.JbdcDataSource">
         <property name="user" value="sa"/>
