@@ -20,7 +20,7 @@ public class ControllerExceptionMapper implements ExceptionMapper<ControllerExce
 
     @Override
     public Response toResponse(ControllerException exception) {
-        Logger.getLogger(getClass().getName()).log(Level.SEVERE, exception.getMessage(), exception);
+        //Logger.getLogger(getClass().getName()).log(Level.SEVERE, exception.getMessage(), exception);
         return Response.status(Response.Status.OK).header("controller-exception", exception.getMessage()).build();
     }
     

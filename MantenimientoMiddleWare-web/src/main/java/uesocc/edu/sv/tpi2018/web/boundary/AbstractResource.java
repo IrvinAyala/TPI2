@@ -102,7 +102,7 @@ public abstract class AbstractResource<T> implements Serializable {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public T create(T registro) throws Exception {
+    public T create(T registro) throws Exception {//en vez de T Object
         if (registro != null) {//igual cero 0 y areglar registro != null && registro.getidtipoDoc == null
             if (getFacade() != null) {
                 try {
