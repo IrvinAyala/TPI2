@@ -39,6 +39,12 @@ public class EquipoDetalle implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "numero_serie")
     private String numeroSerie;
+    
+    //caracteristicas - pdf
+    //surefire para pruebas paralelas
+    //findbyname... notacion personalizada y reflexion...
+    
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_articulo")
