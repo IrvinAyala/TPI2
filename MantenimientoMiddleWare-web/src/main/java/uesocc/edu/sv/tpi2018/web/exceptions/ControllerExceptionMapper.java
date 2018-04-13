@@ -5,6 +5,8 @@
  */
 package uesocc.edu.sv.tpi2018.web.exceptions;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -18,7 +20,8 @@ public class ControllerExceptionMapper implements ExceptionMapper<ControllerExce
 
     @Override
     public Response toResponse(ControllerException exception) {
-        return Response.status(Response.Status.OK).header("controllerException", exception.getMessage()).build();
+        //Logger.getLogger(getClass().getName()).log(Level.SEVERE, exception.getMessage(), exception);
+        return Response.status(Response.Status.OK).header("controller-exception", exception.getMessage()).build();
     }
     
 }

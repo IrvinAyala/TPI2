@@ -5,6 +5,8 @@
  */
 package uesocc.edu.sv.tpi2018.web.exceptions;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
@@ -20,7 +22,8 @@ public class NotFoundMapper implements javax.ws.rs.ext.ExceptionMapper<NotFoundE
     
     @Override
     public Response toResponse(NotFoundException exception) {
-        return Response.status(Response.Status.NOT_FOUND).header("ServerException", exception.getMessage()).build();
+        Logger.getLogger(getClass().getName()).log(Level.SEVERE, exception.getMessage(), exception);
+        return Response.status(Response.Status.NOT_FOUND).header("server-exception", exception.getMessage()).build();
     }
     
 }

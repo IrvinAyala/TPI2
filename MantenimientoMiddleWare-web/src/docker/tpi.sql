@@ -116,6 +116,7 @@ CREATE TABLE public.articulo(
 	id_parte int4 NOT NULL,
 	nombre varchar(255) NOT NULL,
 	descripcion text DEFAULT null,
+	activo boolean NOT NULL DEFAULT true,
 	CONSTRAINT id_articulo PRIMARY KEY (id_articulo)
 
 );
@@ -129,6 +130,7 @@ CREATE TABLE public.parte(
 	id_parte serial NOT NULL,
 	nombre varchar(100) NOT NULL,
 	descripcion text DEFAULT null,
+	activo boolean NOT NULL DEFAULT true,
 	CONSTRAINT id_parte PRIMARY KEY (id_parte)
 
 );
@@ -179,6 +181,7 @@ ALTER TABLE public.calendario_solicitud OWNER TO postgres;
 CREATE TABLE public.orden_trabajo(
 	id_orden_trabajo serial NOT NULL,
 	id_solicitud int4 NOT NULL,
+	id_equipo int4 NOT NULL,
 	id_prioridad int4 NOT NULL,
 	id_tipo_mantenimiento int4 NOT NULL,
 	CONSTRAINT id_orden_trabajo PRIMARY KEY (id_orden_trabajo)

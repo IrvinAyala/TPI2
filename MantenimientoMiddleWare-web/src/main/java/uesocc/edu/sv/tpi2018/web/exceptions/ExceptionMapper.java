@@ -5,6 +5,8 @@
  */
 package uesocc.edu.sv.tpi2018.web.exceptions;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
@@ -19,7 +21,7 @@ public class ExceptionMapper implements javax.ws.rs.ext.ExceptionMapper<Throwabl
     
     @Override
     public Response toResponse(Throwable exception) {
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("ServerException", exception.getMessage()).build();
+        Logger.getLogger(getClass().getName()).log(Level.SEVERE, exception.getMessage(), exception);
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("server-exception", exception.getMessage()).build();
     }
-    
 }

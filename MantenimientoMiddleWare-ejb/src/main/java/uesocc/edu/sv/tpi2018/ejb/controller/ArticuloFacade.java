@@ -5,9 +5,11 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import uesocc.edu.sv.tpi2018.ejb.entities.Articulo;
 
 /**
@@ -27,6 +29,13 @@ public class ArticuloFacade extends AbstractFacade<Articulo> implements Articulo
 
     public ArticuloFacade() {
         super(Articulo.class,"Articulo.findByNombreLike");
+    }
+
+    @Override
+    public List<Articulo> findByIdEquipo(int idEquipo) {
+        Query q = getEntityManager().createNamedQuery("Articulo.findByIdEquipo");
+        q.setParameter("idEquipo", idEquipo);
+        return q.getResultList();
     }
     
 }

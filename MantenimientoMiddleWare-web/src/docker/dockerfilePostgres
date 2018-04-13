@@ -1,5 +1,5 @@
 FROM postgres:9.6.3-alpine
-COPY tpi10am.sql /docker-entrypoint-initdb.d/tpi.sql
+COPY tpi.sql /docker-entrypoint-initdb.d/tpi.sql
 
 
 

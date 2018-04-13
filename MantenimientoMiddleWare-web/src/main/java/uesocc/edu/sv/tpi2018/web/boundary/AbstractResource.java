@@ -2,6 +2,9 @@ package uesocc.edu.sv.tpi2018.web.boundary;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityExistsException;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -39,12 +42,12 @@ public abstract class AbstractResource<T> implements Serializable {
             if (pagesize == 0) {
                 salida = getFacade().findAll();
             } else if (pagesize > 0 && first >= 0) {
-                salida = getFacade().findRange(first,pagesize);
+                salida = getFacade().findRange(first, pagesize);
             }
-            if (salida != null) {
-                return salida;
+            if (salida == null) {
+                throw new ControllerException(ControllerException.Message.PARAMETRO_INVALIDO);
             }
-            throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
+            return salida;
         }
         throw new NullPointerException("Facade null");
     }
@@ -83,30 +86,36 @@ public abstract class AbstractResource<T> implements Serializable {
     @DELETE
     @Path("{iddelete}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public boolean deleteElement(@PathParam("iddelete") Integer id) throws Exception {
+    public String deleteElement(@PathParam("iddelete") Integer id) throws Exception {
         if (id > 0) {
             if (getFacade() != null) {
                 T encontrado = getFacade().findById(id);
                 if (encontrado != null) {
-                    return getFacade().remove(encontrado);
+                    return String.valueOf(getFacade().remove(encontrado));
                 }
                 throw new ControllerException(ControllerException.Message.REGISTRO_NO_ENCONTRADO);
             }
             throw new NullPointerException("Facade null");
         }
-        throw new ControllerException(ControllerException.Message.REGISTRO_NO_ELIMINADO);
+        throw new ControllerException(ControllerException.Message.PARAMETRO_INVALIDO);
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public T create(T registro) throws Exception {
+    public T create(T registro) throws Exception {//en vez de T Object
         if (registro != null) {//igual cero 0 y areglar registro != null && registro.getidtipoDoc == null
             if (getFacade() != null) {
-                T r = getFacade().create(registro);
-                if (r != null) {
-                    return r;
+                try {
+                    T r = getFacade().create(registro);
+                    if (r != null) {
+                        return r;
+                    }
+                    throw new ControllerException(ControllerException.Message.REGISTRO_NO_CREADO);
+                } catch (EntityExistsException e) {
+                    Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+                    throw new ControllerException(ControllerException.Message.REGISTRO_REPETIDO);
                 }
-                throw new ControllerException(ControllerException.Message.REGISTRO_NO_CREADO);
+
             }
             throw new NullPointerException("Facade null");
         }

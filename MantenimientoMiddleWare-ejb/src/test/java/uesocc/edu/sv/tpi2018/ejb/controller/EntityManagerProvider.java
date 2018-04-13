@@ -59,12 +59,8 @@ public class EntityManagerProvider implements TestRule {
     public EntityTransaction getTx() {
         return tx;
     }
-    public void killInstance(){
-        object=null;
-    }
+
     
-    public void rollbackResource(EntityTransaction tx){
-        tx.rollback();
-    }
+   
 
 }

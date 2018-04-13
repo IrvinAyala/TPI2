@@ -54,7 +54,7 @@ public abstract class AbstractFacade<T> {
 
     public T create(T entity) {
         T salida = null;
-        try {
+        try {//propagar excepciones - 
             EntityManager em = getEntityManager();
             if (em != null && entity != null) {
                 em.persist(entity);

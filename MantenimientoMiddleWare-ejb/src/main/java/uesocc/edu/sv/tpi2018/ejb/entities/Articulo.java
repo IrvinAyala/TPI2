@@ -37,7 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Articulo.findByNombreLike", query = "SELECT a FROM Articulo a WHERE LOWER(a.nombre) LIKE CONCAT('%',LOWER(:name),'%')")
     , @NamedQuery(name = "Articulo.findByIdArticulo", query = "SELECT a FROM Articulo a WHERE a.idArticulo = :idArticulo")
     , @NamedQuery(name = "Articulo.findByNombre", query = "SELECT a FROM Articulo a WHERE a.nombre = :nombre")
-    , @NamedQuery(name = "Articulo.findByDescripcion", query = "SELECT a FROM Articulo a WHERE a.descripcion = :descripcion")})
+    , @NamedQuery(name = "Articulo.findByDescripcion", query = "SELECT a FROM Articulo a WHERE a.descripcion = :descripcion")
+    , @NamedQuery(name = "Articulo.findByActivo", query = "SELECT a FROM Articulo a WHERE a.activo = :activo")
+    , @NamedQuery(name = "Articulo.findByIdEquipo", query = "SELECT a FROM Articulo a JOIN a.modeloDetalleList md JOIN md.modelo m JOIN m.equipoList e WHERE e.idEquipo = :idEquipo")})
 public class Articulo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,6 +56,10 @@ public class Articulo implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "descripcion")
     private String descripcion;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "activo")
+    private boolean activo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "articulo")
     private List<ModeloDetalle> modeloDetalleList;
     @JoinColumn(name = "id_marca", referencedColumnName = "id_marca")
@@ -97,6 +103,13 @@ public class Articulo implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @XmlTransient

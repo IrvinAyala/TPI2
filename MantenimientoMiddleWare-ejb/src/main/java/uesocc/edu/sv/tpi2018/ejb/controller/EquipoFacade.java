@@ -5,10 +5,13 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
+import uesocc.edu.sv.tpi2018.ejb.entities.EquipoDetalle;
 
 /**
  *
@@ -28,5 +31,14 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
     public EquipoFacade() {
         super(Equipo.class);
     }
+
+    @Override
+    public List<EquipoDetalle> getDetalle(int idEquipo) {
+        Query q = getEntityManager().createNamedQuery("Equipo.findDetalle");
+        q.setParameter("idEquipo", idEquipo);
+        return q.getResultList();
+    }
+    
+    
     
 }

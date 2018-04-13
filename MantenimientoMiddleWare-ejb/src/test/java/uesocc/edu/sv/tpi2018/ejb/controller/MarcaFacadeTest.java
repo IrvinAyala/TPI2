@@ -6,19 +6,21 @@
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
 import java.util.List;
-import javax.persistence.EntityTransaction;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.ClassRule;
 import org.powermock.reflect.Whitebox;
+
 import uesocc.edu.sv.tpi2018.ejb.entities.Marca;
 
 /**
  *
- * @author doratt
+ * @author danm
  */
 public class MarcaFacadeTest {
 
@@ -31,26 +33,27 @@ public class MarcaFacadeTest {
     public static void init() {
         emp = EntityManagerProvider.getInstance("mantenimientoTestPU");
         Whitebox.setInternalState(mf, "em", emp.getEm());
-        Whitebox.setInternalState(mf, "query", "Marca.findByNombreLike");
+
 
     }
 
     @Test
     public void when_creating_null_marca_expect_false() {
-        startTransaction();
+
         boolean result = mf.crear(null);
 
         assertEquals(0, mf.findAll().size());
         assertFalse(result);
+
     }
 
     @Test
     public void when_creating_new_marca_expect_true() {
+        //paralelas
         Marca nuevaMarca = new Marca();
         nuevaMarca.setNombre("Test Marca");
         nuevaMarca.setActivo(true);
 
-        startTransaction();
         boolean result = mf.crear(nuevaMarca);
 
         assertTrue(result);
@@ -59,7 +62,6 @@ public class MarcaFacadeTest {
 
     @Test
     public void when_modify_valid_marca_expect_true() {
-        startTransaction();
         mf.getEntityManager().persist(new Marca(null, "test marca", true));
 
         Marca expected = new Marca(1, "changed marca", false);
@@ -72,7 +74,6 @@ public class MarcaFacadeTest {
 
     @Test
     public void when_delete_null_marca_expect_false() {
-        startTransaction();
         boolean result = mf.remove(null);
         assertEquals(0, mf.findAll().size());
         assertFalse(result);
@@ -80,7 +81,6 @@ public class MarcaFacadeTest {
 
     @Test
     public void when_delete_valid_marca_expect_true() {
-        startTransaction();
         mf.getEntityManager().persist(new Marca(null, "test marca", true));
         Marca entity = new Marca(1);
         boolean result = mf.remove(entity);
@@ -88,8 +88,7 @@ public class MarcaFacadeTest {
     }
 
     @Test
-    public void findAll() {
-        startTransaction();
+    public void testFindAll() {
         mf.getEntityManager().persist(new Marca(null, "test marca", true));
         mf.getEntityManager().persist(new Marca(null, "test marca", true));
         List<Marca> list = mf.findAll();
@@ -98,7 +97,6 @@ public class MarcaFacadeTest {
 
     @Test
     public void when_find_valid_return_entity() {
-        startTransaction();
         mf.getEntityManager().persist(new Marca(1, "test find", true));
         Marca result = mf.findById(1);
         assertEquals("test find", result.getNombre());
@@ -106,14 +104,12 @@ public class MarcaFacadeTest {
 
     @Test
     public void when_find_invalid_return_entity() {
-        startTransaction();
         Marca result = mf.findById(1);
         assertNull(result);
     }
 
     @Test
-    public void findbynameLike() {
-        startTransaction();
+    public void testfindbynameLike() {
         mf.getEntityManager().persist(new Marca(null, "findName1", true));
         mf.getEntityManager().persist(new Marca(null, "findName2", true));
         mf.getEntityManager().persist(new Marca(null, "findName3", true));
@@ -125,42 +121,44 @@ public class MarcaFacadeTest {
 
 //        assertEquals(true, result.get(0).getNombre().contains("find4"));
     }
-    
+
     @Test
-    public void count(){
-        startTransaction();
+    public void testCount() {
         mf.getEntityManager().persist(new Marca(null, "findRange1", true));
         mf.getEntityManager().persist(new Marca(null, "findRange2", true));
-        
+
         assertEquals(2, mf.count());
     }
 
     @Test
-    public void findRange() {
-        startTransaction();
+    public void testFindRange() {
         mf.getEntityManager().persist(new Marca(null, "findRange1", true));
         mf.getEntityManager().persist(new Marca(null, "findRange2", true));
         mf.getEntityManager().persist(new Marca(null, "findRange3", true));
         mf.getEntityManager().persist(new Marca(null, "findRange4", true));
         List<Marca> result = mf.findRange(0, 4);
-        
+
         assertNotNull(result);
         assertEquals(4, result.size());
     }
 
-    public void startTransaction() {
+    @Before
+    public void start() {
         mf.getEntityManager().getTransaction().begin();
+
     }
 
     @After
     public void cleanup() {
-        EntityTransaction tx = mf.getEntityManager().getTransaction();
-        emp.rollbackResource(tx);
+
+        //hacer mock de transacciones
+        //paralelas
+        mf.getEntityManager().getTransaction().rollback();
     }
 
     @AfterClass
     public static void tearDown() {
-        emp.killInstance();
+
     }
 
 }
