@@ -171,11 +171,8 @@
                         </goals>
                         <configuration>
                            
-                            <executable>sudo</executable>
+                            <executable>docker-compose</executable>
                             <arguments>
- 				<argument>-pIngrese la contraseña de %p</argument>
- 				<argument>-S</argument>
-			        <argument>docker-compose</argument>
                                 <argument>-f</argument>
                                 <argument>${dockerPath}/docker-compose.yml</argument>
                                 <argument>up</argument>
