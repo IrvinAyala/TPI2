@@ -71,7 +71,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <build>
+<!--    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -123,7 +123,7 @@
                 <version>2.5</version>
                 <executions>
                     <execution>
-                        <id>COPIANDO------------------</id>
+                        <id>COPIANDO**************</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -164,7 +164,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>Test plugin----------------</id>
+                        <id>Test plugin*************</id>
                         <phase>install</phase>
                         <goals>
                             <goal>exec</goal>
@@ -176,12 +176,12 @@
                                 <argument>-f</argument>
                                 <argument>${dockerPath}/docker-compose.yml</argument>
                                 <argument>up</argument>
-                                <argument>--build</argument>
+                                <argument>-build</argument>
                             </arguments>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 </project>
