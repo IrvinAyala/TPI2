@@ -1,14 +1,14 @@
 version: '3'
 services:
   web:
-    build: .
+    build: ./payara/
     depends_on:
       - postgres
     ports:
       - "8080:8080"
   postgres:
     build: 
-     context: .
+     context: ./postgres
      dockerfile: dockerfilePostgres
     restart: always
     volumes:
