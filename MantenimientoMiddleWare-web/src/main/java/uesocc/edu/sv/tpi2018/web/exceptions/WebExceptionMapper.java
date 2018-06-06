@@ -15,7 +15,7 @@ import javax.ws.rs.ext.Provider;
  * @author danm
  */
 @Provider
-public class ExceptionMapper implements javax.ws.rs.ext.ExceptionMapper<Throwable> {
+public class WebExceptionMapper implements javax.ws.rs.ext.ExceptionMapper<Throwable> {
 
     public EnumControllerException messages;
     
