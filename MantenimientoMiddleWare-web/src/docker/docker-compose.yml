@@ -1,11 +1,5 @@
 version: '3'
 services:
-  web:
-    build: .
-    depends_on:
-      - postgres
-    ports:
-      - "8080:8080"
   postgres:
     build: 
      context: .
@@ -19,5 +13,11 @@ services:
       POSTGRES_PASSWORD: tpiPassword
       POSTGRES_USER: tpi
       POSTGRES_DB: tpitest
+  web:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
 volumes:
   pgdata:

@@ -34,7 +34,6 @@ public class MarcaFacadeTest {
         emp = EntityManagerProvider.getInstance("mantenimientoTestPU");
         Whitebox.setInternalState(mf, "em", emp.getEm());
 
-
     }
 
     @Test
