@@ -34,7 +34,7 @@ import uesocc.edu.sv.tpi2018.ejb.controller.MarcaFacadeLocal;
 import uesocc.edu.sv.tpi2018.ejb.entities.Marca;
 import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
 import uesocc.edu.sv.tpi2018.web.exceptions.ControllerExceptionMapper;
-import uesocc.edu.sv.tpi2018.web.exceptions.ExceptionMapper;
+import uesocc.edu.sv.tpi2018.web.exceptions.WebExceptionMapper;
 import uesocc.edu.sv.tpi2018.web.exceptions.NotFoundMapper;
 import org.jboss.resteasy.mock.*;
 import org.junit.Rule;
@@ -62,7 +62,7 @@ public class MarcaResourceTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-//        server = InMemoryRestServer.create(mr,ControllerExceptionMapper.class, ExceptionMapper.class, NotFoundMapper.class);
+//        server = InMemoryRestServer.create(mr,ControllerExceptionMapper.class, WebExceptionMapper.class, NotFoundMapper.class);
 
     }
 
@@ -73,7 +73,7 @@ public class MarcaResourceTest {
 
     @Before
     public void setUp() throws Exception {
-        server = InMemoryRestServer.create(mr, ControllerExceptionMapper.class, ExceptionMapper.class, NotFoundMapper.class);
+        server = InMemoryRestServer.create(mr, ControllerExceptionMapper.class, WebExceptionMapper.class, NotFoundMapper.class);
     }
 
     @After

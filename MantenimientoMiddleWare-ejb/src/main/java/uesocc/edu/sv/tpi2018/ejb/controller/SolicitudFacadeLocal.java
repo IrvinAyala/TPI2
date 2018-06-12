@@ -5,6 +5,7 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.util.List;
 import javax.ejb.Local;
 import uesocc.edu.sv.tpi2018.ejb.entities.Solicitud;
 
@@ -14,5 +15,5 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Solicitud;
  */
 @Local
 public interface SolicitudFacadeLocal extends AbstractInterface<Solicitud>{
-  
+    public List<Solicitud> obtenerEstado(int id);
 }

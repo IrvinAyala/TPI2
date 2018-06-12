@@ -2,7 +2,7 @@ version: '3'
 services:
   postgres:
     build: 
-     context: .
+     context: ./postgres
      dockerfile: dockerfilePostgres
     restart: always
     volumes:
@@ -14,7 +14,7 @@ services:
       POSTGRES_USER: tpi
       POSTGRES_DB: tpitest
   web:
-    build: .
+    build: ./payara/.
     depends_on:
       - postgres
     ports:

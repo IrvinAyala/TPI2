@@ -15,9 +15,13 @@
     <name>MantenimientoMiddleWare-web</name>
 
     <properties>
+        
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <dockerPath>${project.basedir}/src/docker</dockerPath>
+        <dockerPath>${project.basedir}/src/docker/payara</dockerPath>
         <docker-compose-home>/usr/local/bin/docker-compose</docker-compose-home>
     </properties>
     
@@ -118,12 +122,13 @@
                     </execution>
                 </executions>
             </plugin>
+            
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.5</version>
                 <executions>
                     <execution>
-                        <id>COPIANDO------------------</id>
+                        <id>COPIANDO**************</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -143,7 +148,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+           <!-- <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
@@ -165,7 +170,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>Test plugin----------------</id>
+                        <id>Test plugin*************</id>
                         <phase>install</phase>
                         <goals>
                             <goal>exec</goal>
@@ -177,12 +182,12 @@
                                 <argument>-f</argument>
                                 <argument>${dockerPath}/docker-compose.yml</argument>
                                 <argument>up</argument>
-                                <argument>--build</argument>
+                                <argument>-build</argument>
                             </arguments>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>

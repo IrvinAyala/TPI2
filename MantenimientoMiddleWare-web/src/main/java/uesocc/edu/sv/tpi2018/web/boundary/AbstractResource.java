@@ -121,4 +121,11 @@ public abstract class AbstractResource<T> implements Serializable {
         }
         throw new ControllerException(ControllerException.Message.FALTA_CAMPO_REQUERIDO);
     }
+    
+    @GET
+    @Path("count")
+    @Produces(MediaType.TEXT_PLAIN+"; charset=utf-8")
+    public int count(){
+        return getFacade().count();
+    }
 }

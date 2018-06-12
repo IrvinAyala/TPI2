@@ -184,6 +184,7 @@ CREATE TABLE public.orden_trabajo(
 	id_equipo int4 NOT NULL,
 	id_prioridad int4 NOT NULL,
 	id_tipo_mantenimiento int4 NOT NULL,
+	fecha timestamp NOT NULL,
 	CONSTRAINT id_orden_trabajo PRIMARY KEY (id_orden_trabajo)
 
 );
@@ -546,5 +547,3 @@ ALTER TABLE public.procedimiento__diagnostico_parte ADD CONSTRAINT id_diagnostic
 REFERENCES public.diagnostico_parte (id_diagnostico_parte) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
-
-
