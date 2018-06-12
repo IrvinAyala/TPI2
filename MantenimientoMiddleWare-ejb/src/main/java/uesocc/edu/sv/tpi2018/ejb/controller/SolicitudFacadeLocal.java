@@ -15,5 +15,5 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Solicitud;
  */
 @Local
 public interface SolicitudFacadeLocal extends AbstractInterface<Solicitud>{
-    public List<Solicitud> obtenerEstado(int id);
+    public List<Object[]> obtenerEstado(int id);
 }
