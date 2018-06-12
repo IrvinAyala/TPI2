@@ -1,6 +1,6 @@
 FROM postgres:9.6.3-alpine
 COPY tpi.sql /docker-entrypoint-initdb.d/tpi.sql
-COPY zdatosTPI.sql /docker-entrypoint-initdb.d/datosTPI.sql
+COPY zdatosTPI.sql /docker-entrypoint-initdb.d/zdatosTPI.sql
 
 
 
