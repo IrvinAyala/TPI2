@@ -36,6 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OrdenTrabajo.findAll", query = "SELECT o FROM OrdenTrabajo o")
+    , @NamedQuery(name = "OrdenTrabajo.noCompletado", query = "SELECT o.idOrdenTrabajo FROM OrdenTrabajo o WHERE EXISTS(SELECT op FROM OrdenTrabajoDetalleEstadoPaso op WHERE op.completado=FALSE AND op.ordenTrabajoDetalle.idOrdenTrabajo.idOrdenTrabajo=o.idOrdenTrabajo) AND EXISTS(SELECT p FROM OrdenTrabajoDetalleEstadoPaso p WHERE p.ordenTrabajoDetalle.idOrdenTrabajo.idOrdenTrabajo=o.idOrdenTrabajo)")
+    , @NamedQuery(name = "OrdenTrabajo.completado", query = "SELECT o.idOrdenTrabajo FROM OrdenTrabajo o WHERE NOT EXISTS(SELECT op FROM OrdenTrabajoDetalleEstadoPaso op WHERE op.completado=FALSE AND op.ordenTrabajoDetalle.idOrdenTrabajo.idOrdenTrabajo=o.idOrdenTrabajo) AND EXISTS(SELECT p FROM OrdenTrabajoDetalleEstadoPaso p WHERE p.ordenTrabajoDetalle.idOrdenTrabajo.idOrdenTrabajo=o.idOrdenTrabajo)")
     , @NamedQuery(name = "OrdenTrabajo.findByIdOrdenTrabajo", query = "SELECT o FROM OrdenTrabajo o WHERE o.idOrdenTrabajo = :idOrdenTrabajo")})
 public class OrdenTrabajo implements Serializable {
 
