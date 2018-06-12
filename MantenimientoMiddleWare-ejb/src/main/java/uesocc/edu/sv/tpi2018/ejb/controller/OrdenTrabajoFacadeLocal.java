@@ -5,6 +5,7 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.util.List;
 import javax.ejb.Local;
 import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
 
@@ -14,5 +15,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
  */
 @Local
 public interface OrdenTrabajoFacadeLocal extends AbstractInterface<OrdenTrabajo>{
-
+    public List<Object[]> obtenerOrdenesNoTerminadas();
+    public List<Object[]> contadorOrdenesNoTerminadas();
 }

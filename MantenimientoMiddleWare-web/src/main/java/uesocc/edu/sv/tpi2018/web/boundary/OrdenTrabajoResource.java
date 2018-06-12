@@ -34,5 +34,4 @@ public class OrdenTrabajoResource extends AbstractResource<OrdenTrabajo>{
         return new OrdenTrabajo();
     }
     
-    
 }
