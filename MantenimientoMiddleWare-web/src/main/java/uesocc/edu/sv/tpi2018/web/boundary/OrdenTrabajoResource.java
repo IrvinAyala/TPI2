@@ -90,5 +90,21 @@ public class OrdenTrabajoResource extends AbstractResource<OrdenTrabajo>{
         }
         throw new NullPointerException("El facade es null");
     }
+    
+    @GET
+    @Path("/noFinalizadas")
+    @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
+    public List<OrdenTrabajo> obtenerOrdenesNoTerminadas(){
+           List<OrdenTrabajo> list=null;
+        if(getFacade()!=null){
+            list = otfl.obtenerOrdenesNoTerminadas();
+            if(list==null){
+                throw new ControllerException(ControllerException.Message.NO_HAY_REGISTROS);
+            }
+           return list;
+        }
+        throw new NullPointerException("El facade es null");
+    }
+
 
 }
