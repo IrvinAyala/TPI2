@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Solicitud.findByIdSolicitud", query = "SELECT s FROM Solicitud s WHERE s.idSolicitud = :idSolicitud")
     , @NamedQuery(name = "Solicitud.findByUnidad", query = "SELECT s FROM Solicitud s WHERE s.unidad = :unidad")
     , @NamedQuery(name = "Solicitud.findBySolicitante", query = "SELECT s FROM Solicitud s WHERE s.solicitante = :solicitante")
-    , @NamedQuery(name = "Solicitud.pasosNoCompletados", query = "SELECT COUNT(otdep.completado) SUM(CASE ) FROM Solicitud s JOIN s.ordenTrabajoList ot JOIN ot.ordenTrabajoDetalleList otd JOIN otd.ordenTrabajoDetalleEstadoPasoList otdep WHERE s.idSolicitud = :idSolicitud AND otdep.completado = FALSE")
+    //, @NamedQuery(name = "Solicitud.pasosNoCompletados", query = "SELECT COUNT(otdep.completado) SUM(CASE ) FROM Solicitud s JOIN s.ordenTrabajoList ot JOIN ot.ordenTrabajoDetalleList otd JOIN otd.ordenTrabajoDetalleEstadoPasoList otdep WHERE s.idSolicitud = :idSolicitud AND otdep.completado = FALSE")
     , @NamedQuery(name = "Solicitud.estado", query = "SELECT DISTINCT e FROM Solicitud s JOIN s.equipoList e WHERE s.idSolicitud = :idSolicitud")
     , @NamedQuery(name = "Solicitud.findByEstado", query = "SELECT s FROM Solicitud s WHERE s.estado = :estado")})
 public class Solicitud implements Serializable {
