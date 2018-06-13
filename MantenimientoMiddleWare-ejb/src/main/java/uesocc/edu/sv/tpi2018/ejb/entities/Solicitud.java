@@ -6,11 +6,13 @@
 package uesocc.edu.sv.tpi2018.ejb.entities;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,7 +60,7 @@ public class Solicitud implements Serializable {
     private String solicitante;
     @Column(name = "estado")
     private Boolean estado;
-    @ManyToMany(mappedBy = "solicitudList")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "solicitudList")
     private List<Equipo> equipoList;
     @ManyToMany(mappedBy = "solicitudList")
     private List<Calendario> calendarioList;
@@ -159,7 +161,7 @@ public class Solicitud implements Serializable {
 
     @Override
     public String toString() {
-        return "uesocc.edu.sv.tpi2018.ejb.entitiesI.Solicitud[ idSolicitud=" + idSolicitud + " ]";
+        return "Solicitud " + idSolicitud + " lista "+ this.equipoList;
     }
     
 }

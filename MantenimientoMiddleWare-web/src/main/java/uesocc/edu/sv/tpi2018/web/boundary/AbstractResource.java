@@ -104,10 +104,12 @@ public abstract class AbstractResource<T> implements Serializable {
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
     public T create(T registro) throws Exception {//en vez de T Object
         if (registro != null) {//igual cero 0 y areglar registro != null && registro.getidtipoDoc == null
+            System.out.println(registro.toString());
             if (getFacade() != null) {
                 try {
                     T r = getFacade().create(registro);
                     if (r != null) {
+                         System.out.println(r.toString()+"Abstract");
                         return r;
                     }
                     throw new ControllerException(ControllerException.Message.REGISTRO_NO_CREADO);
