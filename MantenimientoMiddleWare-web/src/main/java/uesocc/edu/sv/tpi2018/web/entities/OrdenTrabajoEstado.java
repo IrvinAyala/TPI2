@@ -15,6 +15,11 @@ import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
 public class OrdenTrabajoEstado extends OrdenTrabajo implements Serializable{
     public OrdenTrabajoEstado(OrdenTrabajo o, String correlativo){
         super(o.getIdOrdenTrabajo());
+        this.setIdEquipo(o.getIdEquipo());
+        this.setFecha(o.getFecha());
+        this.setIdPrioridad(o.getIdPrioridad());
+        this.setIdTipoMantenimiento(o.getIdTipoMantenimiento());
+        this.setIdSolicitud(o.getIdSolicitud());
         this.correlativo=correlativo;
     }
     public OrdenTrabajoEstado(){
