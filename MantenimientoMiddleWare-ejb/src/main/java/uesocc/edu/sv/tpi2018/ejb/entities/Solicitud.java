@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Solicitud.findByIdSolicitud", query = "SELECT s FROM Solicitud s WHERE s.idSolicitud = :idSolicitud")
     , @NamedQuery(name = "Solicitud.findByUnidad", query = "SELECT s FROM Solicitud s WHERE s.unidad = :unidad")
     , @NamedQuery(name = "Solicitud.findBySolicitante", query = "SELECT s FROM Solicitud s WHERE s.solicitante = :solicitante")
-    , @NamedQuery(name = "Solicitud.estado", query = "SELECT e, COUNT(SELECT otdep2.procedimientoPaso.idProcedimientoPaso FROM OrdenTrabajoDetalleEstadoPaso otdep2 WHERE otdep2.ordenTrabajoDetalle.idOrdenTrabajo.idEquipo = e.idEquipo AND otdep2.completado = TRUE),COUNT(SELECT otdep2.procedimientoPaso.idProcedimientoPaso FROM OrdenTrabajoDetalleEstadoPaso otdep2 WHERE otdep2.ordenTrabajoDetalle.idOrdenTrabajo.idEquipo = e.idEquipo) FROM Solicitud s JOIN s.equipoList e JOIN s.ordenTrabajoList ot JOIN ot.ordenTrabajoDetalleList otd JOIN otd.ordenTrabajoDetalleEstadoPasoList otdep WHERE s.idSolicitud = :idSolicitud GROUP BY e.idEquipo")
+    , @NamedQuery(name = "Solicitud.pasosNoCompletados", query = "SELECT COUNT(otdep.completado) SUM(CASE ) FROM Solicitud s JOIN s.ordenTrabajoList ot JOIN ot.ordenTrabajoDetalleList otd JOIN otd.ordenTrabajoDetalleEstadoPasoList otdep WHERE s.idSolicitud = :idSolicitud AND otdep.completado = FALSE")
+    , @NamedQuery(name = "Solicitud.estado", query = "SELECT DISTINCT e FROM Solicitud s JOIN s.equipoList e WHERE s.idSolicitud = :idSolicitud")
     , @NamedQuery(name = "Solicitud.findByEstado", query = "SELECT s FROM Solicitud s WHERE s.estado = :estado")})
 public class Solicitud implements Serializable {
 

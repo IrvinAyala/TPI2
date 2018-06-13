@@ -44,19 +44,8 @@ public class SolicitudResource extends AbstractResource<Solicitud>{
     @GET
     @Path("{id}/estado")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public List<EquipoEstado> obtenerEstado(@PathParam("id") int id){
-        List<Object[]> lista = sfl.obtenerEstado(id);
-        List<EquipoEstado> listaEquipos = new ArrayList<>();
-        System.out.println("lista de object");
-        lista.forEach( (Object[] o) -> {
-            Equipo e = (Equipo) o[0];
-            EquipoEstado es = new EquipoEstado(e, Integer.parseInt(o[1].toString()),Integer.parseInt(o[2].toString()));
-            es.setIdModelo(e.getIdModelo());
-            es.setIdUnidad(e.getIdUnidad());
-            listaEquipos.add(es);
-        });
-
-        return listaEquipos;
+    public List<Equipo> obtenerEstado(@PathParam("id") int id){
+        return sfl.obtenerEstado(id);
     }
     
     

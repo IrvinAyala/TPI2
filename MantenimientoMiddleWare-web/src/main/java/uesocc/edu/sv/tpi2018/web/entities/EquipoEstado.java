@@ -14,34 +14,26 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
  */
 public class EquipoEstado extends Equipo implements Serializable {
 
-    public EquipoEstado(Equipo e, int completados, int totales) {
+    public EquipoEstado(Equipo e, int faltantes) {
         super(e.getIdEquipo(), e.getCodigoCorrelativo());
-        this.completados = completados;
-        this.totales = totales;
+        this.faltantes = faltantes;
+        
     }
 
     public EquipoEstado() {
 
     }
 
-    public int completados;
-
-    public int totales;
-
-    public int getCompletados() {
-        return completados;
+    public int getFaltantes() {
+        return faltantes;
     }
 
-    public void setCompletados(int completados) {
-        this.completados = completados;
+    public void setFaltantes(int faltantes) {
+        this.faltantes = faltantes;
     }
+    
+    
 
-    public int getTotales() {
-        return totales;
-    }
-
-    public void setTotales(int totales) {
-        this.totales = totales;
-    }
+    public int faltantes;
 
 }

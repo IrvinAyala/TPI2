@@ -36,7 +36,7 @@ public class SolicitudFacade extends AbstractFacade<Solicitud> implements Solici
     }
 
     @Override
-    public List<Object[]> obtenerEstado(int id) {
+    public List<Equipo> obtenerEstado(int id) {
 
         try {
             Query q = getEntityManager().createNamedQuery("Solicitud.estado");
