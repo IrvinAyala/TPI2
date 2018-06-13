@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Equipo.findAll", query = "SELECT e FROM Equipo e")
     , @NamedQuery(name = "Equipo.findByIdEquipo", query = "SELECT e FROM Equipo e WHERE e.idEquipo = :idEquipo")
+    , @NamedQuery(name = "Equipo.historial", query = "SELECT o FROM OrdenTrabajo o WHERE NOT EXISTS(SELECT op FROM OrdenTrabajoDetalleEstadoPaso op WHERE op.completado=FALSE AND op.ordenTrabajoDetalle.idOrdenTrabajo.idOrdenTrabajo=o.idOrdenTrabajo) AND EXISTS(SELECT p FROM OrdenTrabajoDetalleEstadoPaso p WHERE p.ordenTrabajoDetalle.idOrdenTrabajo.idOrdenTrabajo=o.idOrdenTrabajo) AND o.idEquipo = :idEquipo")
     , @NamedQuery(name = "Equipo.findDetalle", query = "SELECT ed FROM Equipo e JOIN e.equipoDetalleList ed WHERE e.idEquipo = :idEquipo")
     , @NamedQuery(name = "Equipo.findByCodigoCorrelativo", query = "SELECT e FROM Equipo e WHERE e.codigoCorrelativo = :codigoCorrelativo")})
 public class Equipo implements Serializable {

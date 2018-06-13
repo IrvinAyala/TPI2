@@ -42,7 +42,7 @@ public class SolicitudResource extends AbstractResource<Solicitud>{
     }
     
     @GET
-    @Path("estado/{id}")
+    @Path("{id}/estado")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
     public List<EquipoEstado> obtenerEstado(@PathParam("id") int id){
         List<Object[]> lista = sfl.obtenerEstado(id);

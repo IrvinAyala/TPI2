@@ -16,6 +16,7 @@ import uesocc.edu.sv.tpi2018.ejb.controller.AbstractInterface;
 import uesocc.edu.sv.tpi2018.ejb.controller.EquipoFacadeLocal;
 import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
 import uesocc.edu.sv.tpi2018.ejb.entities.EquipoDetalle;
+import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
 
 /**
  *
@@ -42,6 +43,13 @@ public class EquipoResource extends AbstractResource<Equipo>{
     @Path("{id}/detalle/")
     public List<EquipoDetalle> getDetalle(@PathParam("id") int id){
         return efl.getDetalle(id);
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
+    @Path("{id}/historial")
+    public List<OrdenTrabajo> historial(@PathParam("id") int id){
+        return efl.historial(id);
     }
     
 }

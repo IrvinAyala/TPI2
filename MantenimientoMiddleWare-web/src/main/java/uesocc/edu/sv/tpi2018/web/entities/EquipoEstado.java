@@ -13,19 +13,20 @@ import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
  * @author danm
  */
 public class EquipoEstado extends Equipo implements Serializable {
-        
-        public EquipoEstado(Equipo e, int completados, int totales){
-            super(e.getIdEquipo(), e.getCodigoCorrelativo());
-            this.completados = completados;
-            this.totales = totales;
-        }
-        public EquipoEstado(){
-            
-        }
-        
-        public int completados;
-        
-        public int totales;
+
+    public EquipoEstado(Equipo e, int completados, int totales) {
+        super(e.getIdEquipo(), e.getCodigoCorrelativo());
+        this.completados = completados;
+        this.totales = totales;
+    }
+
+    public EquipoEstado() {
+
+    }
+
+    public int completados;
+
+    public int totales;
 
     public int getCompletados() {
         return completados;
@@ -42,6 +43,5 @@ public class EquipoEstado extends Equipo implements Serializable {
     public void setTotales(int totales) {
         this.totales = totales;
     }
-        
-        
-    }
+
+}
