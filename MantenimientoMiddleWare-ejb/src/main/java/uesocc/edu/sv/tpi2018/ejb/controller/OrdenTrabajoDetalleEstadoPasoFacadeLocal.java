@@ -5,7 +5,11 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Local;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
 import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajoDetalleEstadoPaso;
 
 /**
@@ -13,6 +17,8 @@ import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajoDetalleEstadoPaso;
  * @author irvin
  */
 @Local
-public interface OrdenTrabajoDetalleEstadoPasoFacadeLocal extends AbstractInterface<OrdenTrabajoDetalleEstadoPaso>{
+public interface OrdenTrabajoDetalleEstadoPasoFacadeLocal extends AbstractInterface<OrdenTrabajoDetalleEstadoPaso> {
+
+    public JsonArray getDetalleEstadoPasoCompletado(String idEquipoDetalle);
 
 }

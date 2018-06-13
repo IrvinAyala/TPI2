@@ -5,7 +5,10 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,11 +37,16 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
 
     @Override
     public List<EquipoDetalle> getDetalle(int idEquipo) {
-        Query q = getEntityManager().createNamedQuery("Equipo.findDetalle");
-        q.setParameter("idEquipo", idEquipo);
-        return q.getResultList();
+        try {
+            Query q = getEntityManager().createNamedQuery("Equipo.findDetalle");
+            q.setParameter("idEquipo", idEquipo);
+            return q.getResultList();
+            
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return Collections.emptyList();
     }
-    
-    
-    
+
 }
