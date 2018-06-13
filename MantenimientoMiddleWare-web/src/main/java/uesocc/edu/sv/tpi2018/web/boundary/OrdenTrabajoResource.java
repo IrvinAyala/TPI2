@@ -8,10 +8,12 @@ package uesocc.edu.sv.tpi2018.web.boundary;
 import java.sql.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import uesocc.edu.sv.tpi2018.ejb.controller.AbstractInterface;
 import uesocc.edu.sv.tpi2018.ejb.controller.OrdenTrabajoFacadeLocal;
@@ -94,10 +96,11 @@ public class OrdenTrabajoResource extends AbstractResource<OrdenTrabajo>{
     @GET
     @Path("/noFinalizadas")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public List<OrdenTrabajo> obtenerOrdenesNoTerminadas(){
+    public List<OrdenTrabajo> obtenerOrdenesNoTerminadas(@QueryParam("first") @DefaultValue("0") int first,
+            @QueryParam("pagesize") @DefaultValue("0") int pagesize){
            List<OrdenTrabajo> list=null;
         if(getFacade()!=null){
-            list = otfl.obtenerOrdenesNoTerminadas();
+            list = otfl.obtenerOrdenesNoTerminadas(first, pagesize);
             if(list==null){
                 throw new ControllerException(ControllerException.Message.NO_HAY_REGISTROS);
             }

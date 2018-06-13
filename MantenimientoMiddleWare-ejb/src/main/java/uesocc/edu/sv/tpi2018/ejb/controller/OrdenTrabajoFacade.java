@@ -76,9 +76,11 @@ public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements 
     }
     
     @Override
-    public List<OrdenTrabajo> obtenerOrdenesNoTerminadas(){
+    public List<OrdenTrabajo> obtenerOrdenesNoTerminadas(int first, int pagesize){
         try {
             Query q = getEntityManager().createNamedQuery("OrdenTrabajo.noCompletado");
+            q.setFirstResult(first);
+            q.setMaxResults(pagesize);
             return q.getResultList();
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
