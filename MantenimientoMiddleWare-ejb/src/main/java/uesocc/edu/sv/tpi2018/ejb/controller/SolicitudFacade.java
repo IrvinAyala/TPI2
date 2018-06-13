@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
 import uesocc.edu.sv.tpi2018.ejb.entities.Solicitud;
 
 /**
@@ -35,12 +36,11 @@ public class SolicitudFacade extends AbstractFacade<Solicitud> implements Solici
     }
 
     @Override
-    public List<Solicitud> obtenerEstado(int id) {
+    public List<Object[]> obtenerEstado(int id) {
 
         try {
             Query q = getEntityManager().createNamedQuery("Solicitud.estado");
             q.setParameter("idSolicitud", id);
-
             return q.getResultList();
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);

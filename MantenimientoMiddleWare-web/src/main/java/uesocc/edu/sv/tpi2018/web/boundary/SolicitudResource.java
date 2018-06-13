@@ -5,11 +5,14 @@
  */
 package uesocc.edu.sv.tpi2018.web.boundary;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.persistence.EntityExistsException;
+import javax.json.JsonArray;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,8 +21,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import uesocc.edu.sv.tpi2018.ejb.controller.AbstractInterface;
 import uesocc.edu.sv.tpi2018.ejb.controller.SolicitudFacadeLocal;
+import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
 import uesocc.edu.sv.tpi2018.ejb.entities.Solicitud;
 import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
+import uesocc.edu.sv.tpi2018.web.entities.EquipoEstado;
 
 /**
  *
@@ -42,7 +47,7 @@ public class SolicitudResource extends AbstractResource<Solicitud> {
     }
 
     @GET
-    @Path("estado/{id}")
+    @Path("{id}/estado")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
     public List<Solicitud> obtenerEstado(@PathParam("id") int id) {
         return sfl.obtenerEstado(id);
@@ -72,5 +77,5 @@ public class SolicitudResource extends AbstractResource<Solicitud> {
         }
         throw new ControllerException(ControllerException.Message.FALTA_CAMPO_REQUERIDO);
     }
-
+        
 }
