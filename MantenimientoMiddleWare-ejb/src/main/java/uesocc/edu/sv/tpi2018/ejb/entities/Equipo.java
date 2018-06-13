@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -56,9 +57,9 @@ public class Equipo implements Serializable {
     @JoinTable(name = "solicitud_equipo", joinColumns = {
         @JoinColumn(name = "id_equipo", referencedColumnName = "id_equipo")}, inverseJoinColumns = {
         @JoinColumn(name = "id_solicitud", referencedColumnName = "id_solicitud")})
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Solicitud> solicitudList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEquipo")
+    @OneToMany(mappedBy = "idEquipo")
     private List<Calendario> calendarioList;
     @JoinColumn(name = "id_modelo", referencedColumnName = "id_modelo")
     @ManyToOne(optional = false)
