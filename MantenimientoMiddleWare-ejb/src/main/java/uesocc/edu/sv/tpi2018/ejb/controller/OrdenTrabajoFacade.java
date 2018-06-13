@@ -5,9 +5,13 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.sql.Date;
+import java.util.Collections;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
 
 /**
@@ -27,6 +31,46 @@ public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements 
 
     public OrdenTrabajoFacade() {
         super(OrdenTrabajo.class);
+    }
+
+    @Override
+    public List<OrdenTrabajo> getByDate(Date date) {
+        if(date!=null){
+        try {
+            Query q = getEntityManager().createNamedQuery("OrdenTrabajo.findcompletosByFecha");
+            q.setParameter("fecha", date);
+            return q.getResultList();
+        } catch (Exception e) {
+            
+        }
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+    @Override
+    public List<OrdenTrabajo> getByUser(String name) {
+        if(!name.isEmpty()){
+            try {
+                Query q = getEntityManager().createNamedQuery("OrdenTrabajo.findCompletosByUsuario");
+                q.setParameter("name", name);
+                q.getResultList();
+            } catch (Exception e) {
+            }
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+    @Override
+    public List<OrdenTrabajo> getByCorrelativo(String correlativo) {
+    if(!correlativo.isEmpty()){
+            try {
+                Query q = getEntityManager().createNamedQuery("OrdenTrabajo.findcompletosByCorrelativo");
+                q.setParameter("codigo", correlativo);
+                q.getResultList();
+            } catch (Exception e) {
+            }
+        }
+        return Collections.EMPTY_LIST;
     }
     
 }
