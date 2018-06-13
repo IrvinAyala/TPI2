@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
 import uesocc.edu.sv.tpi2018.ejb.entities.EquipoDetalle;
+import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
 
 /**
  *
@@ -41,12 +42,22 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
             Query q = getEntityManager().createNamedQuery("Equipo.findDetalle");
             q.setParameter("idEquipo", idEquipo);
             return q.getResultList();
-            
+
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            return Collections.EMPTY_LIST;
         }
-
-        return Collections.emptyList();
     }
 
+    @Override
+    public List<OrdenTrabajo> historial(int idEquipo) {
+        try{
+            Query q = getEntityManager().createNamedQuery("Equipo.historial");
+            q.setParameter("idEquipo", idEquipo);
+            return q.getResultList();
+        }catch(Exception e){
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            return Collections.EMPTY_LIST;
+        }
+    }
 }
