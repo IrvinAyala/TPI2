@@ -49,6 +49,7 @@ public class EquipoResource extends AbstractResource<Equipo>{
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
     @Path("{id}/historial")
     public List<OrdenTrabajo> historial(@PathParam("id") int id){
+        System.out.println("historial");
         return efl.historial(id);
     }
     
