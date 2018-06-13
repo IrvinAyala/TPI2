@@ -5,9 +5,11 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
 import uesocc.edu.sv.tpi2018.ejb.entities.EquipoDetalle;
 
 /**
