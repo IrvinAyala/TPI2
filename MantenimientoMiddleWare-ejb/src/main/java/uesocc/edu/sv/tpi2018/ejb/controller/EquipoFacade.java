@@ -61,6 +61,7 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
             Query q = getEntityManager().createNamedQuery("Equipo.findDetalle");
             q.setParameter("idEquipo", idEquipo);
             return q.getResultList();
+
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             return Collections.EMPTY_LIST;
@@ -79,5 +80,4 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
             return Collections.EMPTY_LIST;
         }
     }
-
 }
