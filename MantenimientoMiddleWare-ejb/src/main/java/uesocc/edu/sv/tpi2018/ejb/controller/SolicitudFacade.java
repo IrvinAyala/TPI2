@@ -36,7 +36,7 @@ public class SolicitudFacade extends AbstractFacade<Solicitud> implements Solici
     }
 
     @Override
-    public List<Object[]> obtenerEstado(int id) {
+    public List<Equipo> obtenerEstado(int id) {
 
         try {
             Query q = getEntityManager().createNamedQuery("Solicitud.estado");
@@ -47,5 +47,18 @@ public class SolicitudFacade extends AbstractFacade<Solicitud> implements Solici
         }
 
         return Collections.emptyList();
+    }
+
+    @Override
+    public List<Object[]> pasosCompletados(int id) {
+        try {
+            Query q = getEntityManager().createNamedQuery("Solicitud.pasosNoCompletados");
+            q.setParameter("idSolicitud", id);
+            return q.getResultList();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return null;
     }
 }

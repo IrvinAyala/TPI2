@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,14 +33,16 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author irvin
  */
 @Entity
-@Table(name = "equipo",schema = "public")
+@Table(name = "equipo", schema = "public")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Equipo.findAll", query = "SELECT e FROM Equipo e")
     , @NamedQuery(name = "Equipo.findByIdEquipo", query = "SELECT e FROM Equipo e WHERE e.idEquipo = :idEquipo")
     , @NamedQuery(name = "Equipo.historial", query = "SELECT o FROM OrdenTrabajo o WHERE NOT EXISTS(SELECT op FROM OrdenTrabajoDetalleEstadoPaso op WHERE op.completado=FALSE AND op.ordenTrabajoDetalle.idOrdenTrabajo.idOrdenTrabajo=o.idOrdenTrabajo) AND EXISTS(SELECT p FROM OrdenTrabajoDetalleEstadoPaso p WHERE p.ordenTrabajoDetalle.idOrdenTrabajo.idOrdenTrabajo=o.idOrdenTrabajo) AND o.idEquipo = :idEquipo")
     , @NamedQuery(name = "Equipo.findDetalle", query = "SELECT ed FROM Equipo e JOIN e.equipoDetalleList ed WHERE e.idEquipo = :idEquipo")
+    , @NamedQuery(name = "Equipo.findByCodigoCorrelativoLike", query = "SELECT e FROM Equipo e WHERE LOWER(e.codigoCorrelativo) LIKE CONCAT('%',LOWER(:name),'%')")
     , @NamedQuery(name = "Equipo.findByCodigoCorrelativo", query = "SELECT e FROM Equipo e WHERE e.codigoCorrelativo = :codigoCorrelativo")})
+
 public class Equipo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,12 +56,9 @@ public class Equipo implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "codigo_correlativo")
     private String codigoCorrelativo;
-    @JoinTable(name = "solicitud_equipo", joinColumns = {
-        @JoinColumn(name = "id_equipo", referencedColumnName = "id_equipo")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_solicitud", referencedColumnName = "id_solicitud")})
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "equipoList")
     private List<Solicitud> solicitudList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEquipo")
+    @OneToMany(mappedBy = "idEquipo")
     private List<Calendario> calendarioList;
     @JoinColumn(name = "id_modelo", referencedColumnName = "id_modelo")
     @ManyToOne(optional = false)
@@ -175,5 +175,5 @@ public class Equipo implements Serializable {
     public String toString() {
         return "uesocc.edu.sv.tpi2018.ejb.entitiesI.Equipo[ idEquipo=" + idEquipo + " ]";
     }
-    
+
 }

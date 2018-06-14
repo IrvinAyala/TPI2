@@ -5,6 +5,8 @@
  */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.sql.Date;
 import java.util.Collections;
 import java.util.List;
@@ -117,4 +119,16 @@ public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements 
     }
     
     
+    @Override
+    public List<Object[]> obtenerOrdenesNoTerminadas(int first, int pagesize){
+        try {
+            Query q = getEntityManager().createNamedQuery("OrdenTrabajo.noCompletado");
+            q.setFirstResult(first);
+            q.setMaxResults(pagesize);
+            return q.getResultList();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+        return Collections.emptyList();
+    }
 }
