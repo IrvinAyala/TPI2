@@ -16,6 +16,9 @@ import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
  */
 @Local
 public interface OrdenTrabajoFacadeLocal extends AbstractInterface<OrdenTrabajo>{
+public List<OrdenTrabajo> getAll(int first,int pagesize);
+public int countFinalizadas();
+public List<OrdenTrabajo> getByFiltro(int first,int pagesize,String filtro);
 public List<OrdenTrabajo> getByDate(Date date);
 public List<OrdenTrabajo> getByUser(String name);
 public List<OrdenTrabajo> getByCorrelativo(String correlativo);

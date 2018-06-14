@@ -72,5 +72,49 @@ public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements 
         }
         return Collections.EMPTY_LIST;
     }
+
+    @Override
+    public List<OrdenTrabajo> getAll(int first, int pagesize) {
+        if(first>=0&&pagesize>0)
+        {
+              try {
+                Query q = getEntityManager().createNamedQuery("OrdenTrabajo.completado");
+                  System.out.println(q.getResultList());
+                q.setFirstResult(first);
+                q.setMaxResults(pagesize);
+                return q.getResultList();
+            } catch (Exception e) {
+            }
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+    @Override
+    public int countFinalizadas() {
+      try {
+                Query q = getEntityManager().createNamedQuery("OrdenTrabajo.count");
+
+                return ((Long)q.getSingleResult()).intValue();
+            } catch (Exception e) {
+                System.out.println(e);
+                return -1;
+            }   
+    }
+
+    @Override
+    public List<OrdenTrabajo> getByFiltro(int first,int pagesize,String filtro) {
+        
+        try {
+            Query q = getEntityManager().createNamedQuery("OrdenTrabajo.filtro");
+            q.setParameter("filtro", filtro);
+            q.setFirstResult(first);
+            q.setMaxResults(pagesize);
+            return q.getResultList();
+        } catch (Exception e) {
+            
+        }
+        return Collections.EMPTY_LIST;
+    }
+    
     
 }
