@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+s */
 package uesocc.edu.sv.tpi2018.ejb.controller;
 
 import java.util.logging.Level;
@@ -76,7 +76,7 @@ public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements 
     }
     
     @Override
-    public List<Object[]> obtenerOrdenesNoTerminadas(int first, int pagesize){
+    public List<OrdenTrabajo> obtenerOrdenesNoTerminadas(int first, int pagesize){
         try {
             Query q = getEntityManager().createNamedQuery("OrdenTrabajo.noCompletado");
             q.setFirstResult(first);
