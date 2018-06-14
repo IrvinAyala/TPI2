@@ -32,7 +32,7 @@ public class IntegrationIT {
     }
 
     public Client cliente = ClientBuilder.newClient();
-    public WebTarget target = cliente.target("http://192.168.43.50:8080/MantenimientoMiddleWare-web-1.0-SNAPSHOT/webresources");
+    public WebTarget target = cliente.target("http://192.168.43.50:8080/mantenimientoMiddleWare-web-1.0-SNAPSHOT/webresources/marca/1");
     
 
     @BeforeClass
