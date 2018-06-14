@@ -5,10 +5,13 @@
  */
 package uesocc.edu.sv.tpi2018.web.boundary;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.EntityExistsException;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -28,27 +31,27 @@ import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
  */
 @Path("solicitud")
 public class SolicitudResource extends AbstractResource<Solicitud> {
-
+    
     @EJB
     SolicitudFacadeLocal sfl;
-
+    
     @Override
     protected AbstractInterface<Solicitud> getFacade() {
         return sfl;
     }
-
+    
     @Override
     protected Solicitud crearNuevo() {
         return new Solicitud();
     }
-
+    
     @GET
     @Path("{id}/estado")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public List<Equipo> obtenerEstado(@PathParam("id") int id){
+    public List<Equipo> obtenerEstado(@PathParam("id") int id) {
         return sfl.obtenerEstado(id);
     }
-
+    
     @Override
     @POST
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
@@ -67,12 +70,35 @@ public class SolicitudResource extends AbstractResource<Solicitud> {
                     Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
                     throw new ControllerException(ControllerException.Message.REGISTRO_REPETIDO);
                 }
-
+                
             }
             throw new NullPointerException("Facade null");
         }
         throw new ControllerException(ControllerException.Message.FALTA_CAMPO_REQUERIDO);
-
-    }
         
+    }
+    
+    @GET
+    @Path("{id}/pasoscompletados")
+    @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
+    public JsonObject pasosCompletados(@PathParam("id") int id) {
+        try {
+            List<Object[]> lista = sfl.pasosCompletados(id);
+            
+            if(lista.get(0)[0] == null){
+                lista.get(0)[0] = 0;
+            }
+            if(lista.get(0)[1] == null){
+                lista.get(0)[1] = 0;
+            }
+            JsonObject object = Json.createObjectBuilder()
+                    .add("total", lista.get(0)[0].toString())
+                    .add("terminados",lista.get(0)[1].toString())
+                    .build();
+            return object;
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            return null;
+        }
+    }
 }
