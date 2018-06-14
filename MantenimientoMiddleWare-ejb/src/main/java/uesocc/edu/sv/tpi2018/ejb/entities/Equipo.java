@@ -54,10 +54,7 @@ public class Equipo implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "codigo_correlativo")
     private String codigoCorrelativo;
-    @JoinTable(name = "solicitud_equipo", joinColumns = {
-        @JoinColumn(name = "id_equipo", referencedColumnName = "id_equipo")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_solicitud", referencedColumnName = "id_solicitud")})
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "equipoList")
     private List<Solicitud> solicitudList;
     @OneToMany(mappedBy = "idEquipo")
     private List<Calendario> calendarioList;

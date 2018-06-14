@@ -5,10 +5,16 @@
  */
 package uesocc.edu.sv.tpi2018.web.boundary;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonValue;
 import javax.persistence.EntityExistsException;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,6 +25,7 @@ import javax.ws.rs.core.MediaType;
 import uesocc.edu.sv.tpi2018.ejb.controller.AbstractInterface;
 import uesocc.edu.sv.tpi2018.ejb.controller.SolicitudFacadeLocal;
 import uesocc.edu.sv.tpi2018.ejb.entities.Equipo;
+import uesocc.edu.sv.tpi2018.ejb.entities.Modelo;
 import uesocc.edu.sv.tpi2018.ejb.entities.Solicitud;
 import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
 
@@ -49,17 +56,29 @@ public class SolicitudResource extends AbstractResource<Solicitud> {
         return sfl.obtenerEstado(id);
     }
 
-    @Override
+    
     @POST
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public Solicitud create(Solicitud registro) throws Exception {//en vez de T Object
+    public Solicitud create(JsonObject registro) throws Exception {//en vez de T Object
         if (registro != null) {//igual cero 0 y areglar registro != null && registro.getidtipoDoc == null
-            System.out.println(registro.toString());
+            ObjectMapper om = new ObjectMapper();
+            
+            List<Equipo> equipos = om.readValue(registro.getString("equipoList"), new TypeReference<List<Equipo>>(){});
+            equipos.forEach((equipo) -> {
+                System.out.println(equipo);
+            });
+            System.out.println(equipos);
+            Solicitud soli = new Solicitud();
+            soli.setSolicitante(registro.getString("solicitante"));
+            soli.setUnidad(registro.getString("unidad"));
+            soli.setEquipoList(equipos);
+            System.out.println("Antes de persistir: "+soli.toString());
             if (getFacade() != null) {
                 try {
-                    Solicitud r = getFacade().create(registro);
+                    Solicitud r = getFacade().create(soli);
+                    r= getFacade().edit(soli);
                     if (r != null) {
-                        System.out.println(r.toString() + "Solicitud resource");
+                        System.out.println(r.toString() + "Despues de persistir");
                         return r;
                     }
                     throw new ControllerException(ControllerException.Message.REGISTRO_NO_CREADO);
