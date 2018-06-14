@@ -22,7 +22,7 @@ import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
  */
 @Stateless
 public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements OrdenTrabajoFacadeLocal {
-
+//Comentario
     @PersistenceContext(unitName = "mantenimientoPU")
     private EntityManager em;
 
