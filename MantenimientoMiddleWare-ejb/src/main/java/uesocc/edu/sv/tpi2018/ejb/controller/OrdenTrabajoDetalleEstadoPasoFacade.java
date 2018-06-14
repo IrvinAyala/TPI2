@@ -34,6 +34,7 @@ public class OrdenTrabajoDetalleEstadoPasoFacade extends AbstractFacade<OrdenTra
         super(OrdenTrabajoDetalleEstadoPaso.class);
     }
 
+    @Override
     public List<OrdenTrabajoDetalleEstadoPaso> getDetalleEstadoPasoCompletado(String idEquipoDetalle) {
         try {
             Query q = getEntityManager().createNamedQuery("OrdenTrabajoDetalleEstadoPaso.findDetalleEstadoPasoCompletado");
