@@ -56,7 +56,6 @@ public class IntegrationIT {
         
     }
 
-    @Ignore
     @Test
     public void getAllMarcasTest(){
         Response response = target.path("/marca/1").request(MediaType.APPLICATION_JSON).get();
