@@ -16,6 +16,6 @@ import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajoDetalleEstadoPaso;
 @Local
 public interface OrdenTrabajoDetalleEstadoPasoFacadeLocal extends AbstractInterface<OrdenTrabajoDetalleEstadoPaso> {
 
-    public List<Object[]> getDetalleEstadoPasoCompletado(String idEquipoDetalle);
+    public List<OrdenTrabajoDetalleEstadoPaso> getDetalleEstadoPasoCompletado(String idEquipoDetalle);
 
 }

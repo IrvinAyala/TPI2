@@ -5,7 +5,6 @@
  */
 package uesocc.edu.sv.tpi2018.web.boundary;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
@@ -16,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import uesocc.edu.sv.tpi2018.ejb.controller.AbstractInterface;
 import uesocc.edu.sv.tpi2018.ejb.controller.OrdenTrabajoDetalleEstadoPasoFacadeLocal;
 import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajoDetalleEstadoPaso;
-import uesocc.edu.sv.tpi2018.web.entities.DetalleEstadoPasoCompletado;
 
 /**
  *
@@ -41,14 +39,8 @@ public class OrdenTrabajoDetalleEstadoPasoResource extends AbstractResource<Orde
     @GET
     @Path("detalleestadopasocompletado/{idEquipoDetalle}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public List<DetalleEstadoPasoCompletado> getDetalleEstadoPasoCompletado(@PathParam("idEquipoDetalle") String idEquipoDetalle) {
-        List<Object[]> lista = otdepfl.getDetalleEstadoPasoCompletado(idEquipoDetalle);
-        List<DetalleEstadoPasoCompletado> listaPasosCompletados = new ArrayList<>();
-        lista.forEach((Object[] objeto) -> {
-            DetalleEstadoPasoCompletado depc = new DetalleEstadoPasoCompletado(objeto[0].toString(), Boolean.parseBoolean(objeto[1].toString()));
-            listaPasosCompletados.add(depc);
-        });
-        return listaPasosCompletados;
+    public List<OrdenTrabajoDetalleEstadoPaso> getDetalleEstadoPasoCompletado(@PathParam("idEquipoDetalle") String idEquipoDetalle) {
+        return otdepfl.getDetalleEstadoPasoCompletado(idEquipoDetalle);
     }
 
 }

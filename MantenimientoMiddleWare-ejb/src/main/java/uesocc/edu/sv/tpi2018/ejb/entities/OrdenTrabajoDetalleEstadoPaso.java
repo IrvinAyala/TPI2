@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OrdenTrabajoDetalleEstadoPaso.findAll", query = "SELECT o FROM OrdenTrabajoDetalleEstadoPaso o")
     , @NamedQuery(name = "OrdenTrabajoDetalleEstadoPaso.findByIdOrdenTrabajoDetalle", query = "SELECT o FROM OrdenTrabajoDetalleEstadoPaso o WHERE o.ordenTrabajoDetalleEstadoPasoPK.idOrdenTrabajoDetalle = :idOrdenTrabajoDetalle")
     , @NamedQuery(name = "OrdenTrabajoDetalleEstadoPaso.findByIdProcedimientoPaso", query = "SELECT o FROM OrdenTrabajoDetalleEstadoPaso o WHERE o.ordenTrabajoDetalleEstadoPasoPK.idProcedimientoPaso = :idProcedimientoPaso")
-    , @NamedQuery(name = "OrdenTrabajoDetalleEstadoPaso.findDetalleEstadoPasoCompletado", query = "SELECT c.procedimientoPaso.idPaso.nombre, c.completado FROM OrdenTrabajoDetalleEstadoPaso c WHERE c.ordenTrabajoDetalle.idEquipoDetalle = :idEquipoDetalle")
+    , @NamedQuery(name = "OrdenTrabajoDetalleEstadoPaso.findDetalleEstadoPasoCompletado", query = "SELECT c FROM OrdenTrabajoDetalleEstadoPaso c WHERE c.ordenTrabajoDetalle.idEquipoDetalle = :idEquipoDetalle")
     , @NamedQuery(name = "OrdenTrabajoDetalleEstadoPaso.findByCompletado", query = "SELECT o FROM OrdenTrabajoDetalleEstadoPaso o WHERE o.completado = :completado")})
 public class OrdenTrabajoDetalleEstadoPaso implements Serializable {
 
