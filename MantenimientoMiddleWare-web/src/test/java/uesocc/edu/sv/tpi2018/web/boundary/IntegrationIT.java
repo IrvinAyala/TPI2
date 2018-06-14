@@ -16,6 +16,7 @@ import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -32,7 +33,7 @@ public class IntegrationIT {
     }
 
     public Client cliente = ClientBuilder.newClient();
-    public WebTarget target = cliente.target("http://192.168.43.50:8080/MantenimientoMiddleWare-web-1.0-SNAPSHOT/webresources");
+    public WebTarget target = cliente.target("http://192.168.43.50:8080/mantenimientoMiddleWare-web-1.0-SNAPSHOT/webresources/marca/1");
     
 
     @BeforeClass
@@ -55,7 +56,7 @@ public class IntegrationIT {
         
     }
 
-    
+    @Ignore
     @Test
     public void getAllMarcasTest(){
         Response response = target.path("/marca/1").request(MediaType.APPLICATION_JSON).get();
