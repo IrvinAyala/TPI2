@@ -35,6 +35,25 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
     public EquipoFacade() {
         super(Equipo.class);
     }
+    
+    
+    @Override
+    public List<Equipo> findByCodigoCorrelativoLike(String name, int first, int pagesize) {
+        if (!(name.isEmpty())) {
+            try {
+                Query q = getEntityManager().createNamedQuery("Equipo.findByCodigoCorrelativoLike");
+                q.setParameter("name", name);
+                q.setMaxResults(pagesize);
+                q.setFirstResult(first);
+                return q.getResultList();
+            } catch (Exception e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+
+            }
+        }
+        return Collections.emptyList();
+    }
+    
 
     @Override
     public List<EquipoDetalle> getDetalle(int idEquipo) {
@@ -42,6 +61,7 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
             Query q = getEntityManager().createNamedQuery("Equipo.findDetalle");
             q.setParameter("idEquipo", idEquipo);
             return q.getResultList();
+
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             return Collections.EMPTY_LIST;
@@ -50,15 +70,14 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
 
     @Override
     public List<OrdenTrabajo> historial(int idEquipo) {
-        try{
+        try {
             Query q = getEntityManager().createNamedQuery("Equipo.historial");
             q.setParameter("idEquipo", idEquipo);
             return q.getResultList();
-        }catch(Exception e){
+        } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             System.out.println("error");
             return Collections.EMPTY_LIST;
         }
     }
-
 }

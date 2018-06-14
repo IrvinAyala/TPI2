@@ -15,6 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -60,7 +62,12 @@ public class Solicitud implements Serializable {
     private String solicitante;
     @Column(name = "estado")
     private Boolean estado;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "solicitudList")
+    @JoinTable(name = "solicitud_equipo", joinColumns = {
+        @JoinColumn(name = "id_solicitud", referencedColumnName = "id_solicitud")
+    }, inverseJoinColumns = {
+        @JoinColumn(name = "id_equipo", referencedColumnName = "id_equipo")}
+    )
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<Equipo> equipoList;
     @ManyToMany(mappedBy = "solicitudList")
     private List<Calendario> calendarioList;
@@ -161,7 +168,7 @@ public class Solicitud implements Serializable {
 
     @Override
     public String toString() {
-        return "Solicitud " + idSolicitud + " lista "+ this.equipoList;
+        return "Solicitud " + idSolicitud + " lista " + this.equipoList;
     }
-    
+
 }

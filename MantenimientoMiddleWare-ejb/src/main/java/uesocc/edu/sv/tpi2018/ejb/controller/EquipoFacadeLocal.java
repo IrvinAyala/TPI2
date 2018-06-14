@@ -19,4 +19,5 @@ import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
 public interface EquipoFacadeLocal extends AbstractInterface<Equipo>{
     public List<EquipoDetalle> getDetalle(int idEquipo);
     public List<OrdenTrabajo> historial(int idEquipo);
+    public List<Equipo> findByCodigoCorrelativoLike(String name, int first, int pagesize);
 }
