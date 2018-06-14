@@ -101,7 +101,12 @@ public class SolicitudResource extends AbstractResource<Solicitud> {
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
     public JsonObject pasosCompletados(@PathParam("id") int id) {
         try {
+            
             List<Object[]> lista = sfl.pasosCompletados(id);
+            if(lista.size()==0){
+                Object[] l = {0,0};
+                lista.add(l);
+            }
             
             if(lista.get(0)[0] == null){
                 lista.get(0)[0] = 0;

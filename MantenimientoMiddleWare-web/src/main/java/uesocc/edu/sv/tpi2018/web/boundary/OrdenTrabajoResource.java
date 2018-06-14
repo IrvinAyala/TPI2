@@ -82,7 +82,7 @@ public class OrdenTrabajoResource extends AbstractResource<OrdenTrabajo> {
     @Path("/completos")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
     public List<OrdenTrabajo> getAll(@QueryParam("first") @DefaultValue("0") int first,
-            @QueryParam("pagesize") @DefaultValue("1") int pagesize){
+            @QueryParam("pagesize") @DefaultValue("0") int pagesize){
         List<OrdenTrabajo> list=null;
         if(otfl!=null){
             
@@ -128,14 +128,12 @@ public class OrdenTrabajoResource extends AbstractResource<OrdenTrabajo> {
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
     public List<OrdenTrabajo> getbyFilter(@QueryParam("first") @DefaultValue("0") int first,
-            @QueryParam("pagesize") @DefaultValue("1") int pagesize,@QueryParam("filter")String filter){
-        System.out.println("string: "+filter);
-        
+            @QueryParam("pagesize") @DefaultValue("0") int pagesize,@QueryParam("filter")String filter){
+
       List<OrdenTrabajo> list=null;
       if(otfl!=null){
           if(filter!=null){
               list=otfl.getByFiltro(first, pagesize, filter);
-              System.out.println(list);
           }
           if(list==null){
               throw new ControllerException(ControllerException.Message.PARAMETRO_INVALIDO);
@@ -150,19 +148,36 @@ public class OrdenTrabajoResource extends AbstractResource<OrdenTrabajo> {
     @GET
     @Path("/noFinalizadas")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public List<OrdenTrabajoEstado> obtenerOrdenesNoTerminadas(@QueryParam("first") @DefaultValue("0") int first,
+    public List<OrdenTrabajo> obtenerOrdenesNoTerminadas(@QueryParam("first") @DefaultValue("0") int first,
             @QueryParam("pagesize") @DefaultValue("0") int pagesize) {
-        List<OrdenTrabajoEstado> list = new ArrayList<>();
+        List<OrdenTrabajo> list = null;
         if (getFacade() != null) {
-            List<Object[]> lista = otfl.obtenerOrdenesNoTerminadas(first, pagesize);
-            if (lista != null) {
-                lista.forEach((item) -> {
-                    list.add(new OrdenTrabajoEstado((OrdenTrabajo)item[0], item[1].toString()));
-                });
-            }
-            return list;
+            list = otfl.obtenerOrdenesNoTerminadas(first, pagesize);
+        
+        if (list == null) {
+            throw new ControllerException(ControllerException.Message.NO_HAY_REGISTROS);
+        }
+        return list;
         }
         throw new NullPointerException("El facade es null");
     }
+
+//    @GET
+//    @Path("/noFinalizadas")
+//    @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
+//    public List<OrdenTrabajoEstado> obtenerOrdenesNoTerminadas(@QueryParam("first") @DefaultValue("0") int first,
+//            @QueryParam("pagesize") @DefaultValue("0") int pagesize) {
+//        List<OrdenTrabajoEstado> list = new ArrayList<>();
+//        if (getFacade() != null) {
+//            List<Object[]> lista = otfl.obtenerOrdenesNoTerminadas(first, pagesize);
+//            if (lista != null) {
+//                lista.forEach((item) -> {
+//                    list.add(new OrdenTrabajoEstado((OrdenTrabajo)item[0], item[1].toString()));
+//                });
+//            }
+//            return list;
+//        }
+//        throw new NullPointerException("El facade es null");
+//    }
 
 }

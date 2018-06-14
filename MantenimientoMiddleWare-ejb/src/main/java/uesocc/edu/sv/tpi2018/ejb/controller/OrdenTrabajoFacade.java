@@ -41,6 +41,7 @@ public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements 
         try {
             Query q = getEntityManager().createNamedQuery("OrdenTrabajo.findcompletosByFecha");
             q.setParameter("fecha", date);
+            
             return q.getResultList();
         } catch (Exception e) {
             
@@ -109,9 +110,11 @@ public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements 
         try {
             Query q = getEntityManager().createNamedQuery("OrdenTrabajo.filtro");
             q.setParameter("filtro", filtro);
+            if(first==0&&pagesize==0){
             q.setFirstResult(first);
-            q.setMaxResults(pagesize);
-            return q.getResultList();
+            q.setMaxResults(pagesize);    
+            }
+             return q.getResultList();
         } catch (Exception e) {
             
         }
@@ -120,7 +123,7 @@ public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements 
     
     
     @Override
-    public List<Object[]> obtenerOrdenesNoTerminadas(int first, int pagesize){
+    public List<OrdenTrabajo> obtenerOrdenesNoTerminadas(int first, int pagesize){
         try {
             Query q = getEntityManager().createNamedQuery("OrdenTrabajo.noCompletado");
             q.setFirstResult(first);
