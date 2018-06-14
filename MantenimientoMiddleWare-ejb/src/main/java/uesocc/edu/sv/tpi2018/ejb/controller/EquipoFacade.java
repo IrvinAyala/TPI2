@@ -57,6 +57,7 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
             return q.getResultList();
         }catch(Exception e){
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            System.out.println("error");
             return Collections.EMPTY_LIST;
         }
     }

@@ -6,16 +6,20 @@
 package uesocc.edu.sv.tpi2018.web.boundary;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import uesocc.edu.sv.tpi2018.ejb.controller.AbstractInterface;
 import uesocc.edu.sv.tpi2018.ejb.controller.OrdenTrabajoFacadeLocal;
 import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
+import uesocc.edu.sv.tpi2018.web.entities.OrdenTrabajoEstado;
 import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
 
 /**
@@ -23,8 +27,8 @@ import uesocc.edu.sv.tpi2018.web.exceptions.ControllerException;
  * @author andrea
  */
 @Path("ordentrabajo")
-public class OrdenTrabajoResource extends AbstractResource<OrdenTrabajo>{
-    
+public class OrdenTrabajoResource extends AbstractResource<OrdenTrabajo> {
+
     @EJB
     OrdenTrabajoFacadeLocal otfl;
 
@@ -38,55 +42,72 @@ public class OrdenTrabajoResource extends AbstractResource<OrdenTrabajo>{
         return new OrdenTrabajo();
     }
 
-    
     @GET
     @Path("/fecha/{fecha}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public List<OrdenTrabajo> getByDate(@PathParam("fecha")Date date){
-        List<OrdenTrabajo> list=null;
-        if(getFacade()!=null){
-            if(date!=null){
-                 list= otfl.getByDate(date);
+    public List<OrdenTrabajo> getByDate(@PathParam("fecha") Date date) {
+        List<OrdenTrabajo> list = null;
+        if (getFacade() != null) {
+            if (date != null) {
+                list = otfl.getByDate(date);
             }
-            if(list==null){
+            if (list == null) {
                 throw new ControllerException(ControllerException.Message.PARAMETRO_INVALIDO);
             }
-           return list;
+            return list;
         }
         throw new NullPointerException("El facade es null");
-                
+
     }
-    
+
     @GET
     @Path("/user/{user}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public List<OrdenTrabajo> getByUser(@PathParam("user")String user){
-           List<OrdenTrabajo> list=null;
-        if(getFacade()!=null){
-            if(!user.isEmpty()){
-                 list= otfl.getByUser(user);
+    public List<OrdenTrabajo> getByUser(@PathParam("user") String user) {
+        List<OrdenTrabajo> list = null;
+        if (getFacade() != null) {
+            if (!user.isEmpty()) {
+                list = otfl.getByUser(user);
             }
-            if(list==null){
+            if (list == null) {
                 throw new ControllerException(ControllerException.Message.PARAMETRO_INVALIDO);
             }
-           return list;
+            return list;
         }
         throw new NullPointerException("El facade es null");
     }
-    
+
     @GET
     @Path("/correlativo/{codigo}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
-    public List<OrdenTrabajo> getByCorrelativo(@PathParam("codigo")String codigo){
-           List<OrdenTrabajo> list=null;
-        if(getFacade()!=null){
-            if(!codigo.isEmpty()){
-                 list= otfl.getByCorrelativo(codigo);
+    public List<OrdenTrabajo> getByCorrelativo(@PathParam("codigo") String codigo) {
+        List<OrdenTrabajo> list = null;
+        if (getFacade() != null) {
+            if (!codigo.isEmpty()) {
+                list = otfl.getByCorrelativo(codigo);
             }
-            if(list==null){
+            if (list == null) {
                 throw new ControllerException(ControllerException.Message.PARAMETRO_INVALIDO);
             }
-           return list;
+            return list;
+        }
+        throw new NullPointerException("El facade es null");
+    }
+
+    @GET
+    @Path("/noFinalizadas")
+    @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
+    public List<OrdenTrabajoEstado> obtenerOrdenesNoTerminadas(@QueryParam("first") @DefaultValue("0") int first,
+            @QueryParam("pagesize") @DefaultValue("0") int pagesize) {
+        List<OrdenTrabajoEstado> list = new ArrayList<>();
+        if (getFacade() != null) {
+            List<Object[]> lista = otfl.obtenerOrdenesNoTerminadas(first, pagesize);
+            if (lista != null) {
+                lista.forEach((item) -> {
+                    list.add(new OrdenTrabajoEstado((OrdenTrabajo)item[0], item[1].toString()));
+                });
+            }
+            return list;
         }
         throw new NullPointerException("El facade es null");
     }
