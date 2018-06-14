@@ -13,33 +13,27 @@ import uesocc.edu.sv.tpi2018.ejb.entities.OrdenTrabajo;
  * @author andrea
  */
 public class OrdenTrabajoEstado extends OrdenTrabajo implements Serializable{
-    public OrdenTrabajoEstado(OrdenTrabajo o, int completados, int totales){
+    public OrdenTrabajoEstado(OrdenTrabajo o, String correlativo){
         super(o.getIdOrdenTrabajo());
         this.setIdEquipo(o.getIdEquipo());
-        this.completados= completados;
-        this.totales= totales;
+        this.setFecha(o.getFecha());
+        this.setIdPrioridad(o.getIdPrioridad());
+        this.setIdTipoMantenimiento(o.getIdTipoMantenimiento());
+        this.setIdSolicitud(o.getIdSolicitud());
+        this.correlativo=correlativo;
     }
     public OrdenTrabajoEstado(){
         
     }
-    int completados;
-    int totales;
+    public String correlativo;
 
-    public int getCompletados() {
-        return completados;
+    public String getCorrelativo() {
+        return correlativo;
     }
 
-    public void setCompletados(int completados) {
-        this.completados = completados;
+    public void setCorrelativo(String correlativo) {
+        this.correlativo = correlativo;
     }
-
-    public int getTotales() {
-        return totales;
-    }
-
-    public void setTotales(int totales) {
-        this.totales = totales;
-    }
-   
-    
 }
+
+  
